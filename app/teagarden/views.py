@@ -366,13 +366,13 @@ def _user_popup(request):
 @decorators.user_key_required
 def user_popup(request):
     """Pop up to show the user info."""
-    try:
-        return _user_popup(request)
-    except Exception, err:
-        logging.exception('Exception in user_popup processing:')
-        # Return HttpResponse because the JS part expects a 200 status code.
-        return HttpResponse('<font color="red">Error: %s; please report!</font>' %
-                            err.__class__.__name__)
+    #try:
+    return _user_popup(request)
+    #except Exception, err:
+    #    logging.exception('Exception in user_popup processing:')
+    #    # Return HttpResponse because the JS part expects a 200 status code.
+    #    return HttpResponse('<font color="red">Error: %s; please report!</font>' %
+    #                        err.__class__.__name__)
                             
                             
 @login_required

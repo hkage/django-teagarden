@@ -200,17 +200,6 @@ class Account(User):
             return self.username
 
     @property
-    def num_comments(self):
-        num = 0L
-        comments = TableComment.objects.filter(created_by=self.id)
-        comments = comments.filter(is_draft=False)
-        num += comments.count()
-        comments = FieldComment.objects.filter(created_by=self.id)
-        comments = comments.filter(is_draft=False)
-        num += comments.count()
-        return num
-
-    @property
     def num_tables(self):
         tables = Table.objects.filter(created_by=self.id)
         return tables.count()

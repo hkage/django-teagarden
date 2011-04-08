@@ -6,6 +6,27 @@ goog.require('goog.dom');
 goog.require('goog.events');
 goog.require('goog.net.XhrIo');
 goog.require('goog.ui.KeyboardShortcutHandler');
+goog.require('goog.ui.Tooltip');
+
+/**
+  * Display a tooltip
+  * @param {Object} obj Object
+  * @param {String} url_part
+  * @param {String} url_mapper
+  */
+teagarden.show_popup = function(obj, url_part, url_mapper) {
+  var url = obj.getAttribute("href");
+  var index = url.indexOf(url_part);
+  var key = url.substring(index + url_part.length + 1);
+  var xhr = new goog.net.XhrIo();
+  goog.net.XhrIo.send('/' + base_url + url_mapper + key, function(e) {
+    var xhr = e.target;
+    var response = xhr.getResponseText();
+    var tooltip = new goog.ui.Tooltip(obj);
+    tooltip.setHtml(response);
+    tooltip.setShowDelayMs(300);
+  });
+}
 
 // Starred items
 

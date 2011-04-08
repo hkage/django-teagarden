@@ -7,6 +7,7 @@ import cgi
 import logging
 
 from django import template
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
@@ -87,7 +88,7 @@ def show_user_link(user_id):
         user = User.objects.filter(id=user_id)[0]
         account = Account.get_account_for_user(user)
         url = reverse("teagarden.views.show_user", args=[user.id])
-        ret = """<a onmouseover="JS_showInfoPopup(this, 'userPopupDiv', 'mailto', '/user_popup/')"
+        ret = """<a onmouseover="teagarden.show_popup(this, 'user', 'user_popup/')"
         href="%(url)s">%(name)s</a>"""  \
             % {"url": url, "name": cgi.escape(account.nickname)}
         cache.set("user:%d" % user_id, ret)
