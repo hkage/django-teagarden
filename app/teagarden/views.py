@@ -19,6 +19,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
+from django.views.decorators.http import require_http_methods
 
 from teagarden import decorators, models
 
@@ -123,7 +124,7 @@ class CommentForm(forms.Form):
                               widget=forms.Textarea(attrs={"cols": 60}))
 
 
-@decorators.login_required
+@login_required
 def dashboard(request):
     #comments = models.TableComment.objects.filter(is_draft=False)
     #comments = comments.order_by("-created")[:5]
@@ -162,7 +163,7 @@ class UserProfileForm(forms.Form):
     email = forms.EmailField(label=_(u"E-mail"), required=True)
 
 
-@decorators.login_required
+@login_required
 @decorators.table_required
 def discard_table_comment(request, cmt_id):
     q = models.TableComment.objects.filter(id=int(cmt_id))
@@ -196,7 +197,7 @@ def _edit_settings(request):
         return respond(request, "settings.html", {"form": form})
 
 
-@decorators.login_required
+@login_required
 def edit_settings(request):
     return _edit_settings(request)
 
@@ -220,7 +221,7 @@ def publish_comment(request):
     #return HttpResponseRedirect(reverse("teagarden.views.dashboard"))
     
 
-@decorators.login_required   
+@login_required   
 @decorators.table_required 
 def publish(request):
     """Publish all field comments and write a table comment."""
@@ -242,8 +243,8 @@ def publish(request):
         "form": form})
 
 
-@decorators.post_required
-@decorators.login_required
+@require_http_methods(['POST'])
+@login_required
 @decorators.table_required
 def create_comment(request):
     if request.method == "POST":
@@ -258,7 +259,7 @@ def create_comment(request):
             args=[request.table.id]))
 
 
-@decorators.login_required
+@login_required
 @decorators.project_required
 def project(request):
     # TODO: Join Comments/drafts to speed up the select
@@ -292,7 +293,7 @@ def project(request):
         "types": types})
 
 
-@decorators.login_required
+@login_required
 def projects(request):
     projects = models.Project.objects.all()
     projects = projects.order_by("name")
@@ -303,44 +304,14 @@ def _show_user(request):
     return respond(request, "user.html", {})
 
 
-@decorators.login_required
+@login_required
 @decorators.user_key_required
 def show_user(request):
     """Displays the user profile."""
     return _show_user(request)
 
 
-@decorators.post_required
-@decorators.login_required
-@decorators.field_required
-def star_field(request):
-    account = models.Account.current_user_account
-    ###account.user_has_selected_nickname()  # This will preserve account.fresh.
-    if account.starred_fields is None:
-        account.starred_fields = []
-    id = request.field.id
-    if id not in account.starred_fields:
-        account.starred_fields.append(id)
-        #account.put()
-    return respond(request, "field_star.html", {"field": request.field})
-
-
-@decorators.post_required
-@decorators.login_required
-@decorators.table_required
-def star_table(request):
-    account = models.Account.current_user_account
-    ###account.user_has_selected_nickname()  # This will preserve account.fresh.
-    if account.starred_tables is None:
-        account.starred_tables = []
-    id = request.table.id
-    if id not in account.starred_tables:
-        account.starred_tables.append(id)
-        #account.put()
-    return respond(request, "table_star.html", {"table": request.table})
-
-
-@decorators.login_required
+@login_required
 def starred_objects(request):
     starred_tables = models.Table.objects.filter(
         id__in=request.user.account.starred_tables)
@@ -351,7 +322,7 @@ def starred_objects(request):
         "starred_fields": starred_fields})
 
 
-@decorators.login_required
+@login_required
 @decorators.table_required
 def table(request):
     #fields = models.Field.objects.filter(table=request.table.id)
@@ -380,36 +351,6 @@ def table(request):
         "fields": fields,
         "references": references,
         "table": request.table})
-
-
-@decorators.post_required
-@decorators.login_required
-@decorators.field_required
-def unstar_field(request):
-    account = models.Account.current_user_account
-    ###account.user_has_selected_nickname()  # This will preserve account.fresh.
-    if account.starred_fields is None:
-        account.starred_fields = []
-    id = request.field.id
-    if id in account.starred_fields:
-        account.starred_fields[:] = [i for i in account.starred_fields if i != id]
-        #account.put()
-    return respond(request, "field_star.html", {"field": request.field})
-
-
-@decorators.post_required
-@decorators.login_required
-@decorators.table_required
-def unstar_table(request):
-    account = models.Account.current_user_account
-    ###account.user_has_selected_nickname()  # This will preserve account.fresh.
-    if account.starred_tables is None:
-        account.starred_tables = []
-    id = request.table.id
-    if id in account.starred_tables:
-        account.starred_tables[:] = [i for i in account.starred_tables if i != id]
-        #account.put()
-    return respond(request, "table_star.html", {"table": request.table})
 
 
 def _user_popup(request):
@@ -446,3 +387,17 @@ def star_table(request):
 def unstar_table(request):
     request.table.remove_star(request.user)
     return respond(request, 'table_star.html', {'table': request.table})
+
+
+@login_required
+@decorators.field_required
+def star_field(request):
+    request.field.add_star(request.user)
+    return respond(request, 'field_star.html', {'field': request.field})
+
+
+@login_required
+@decorators.field_required
+def unstar_field(request):
+    request.field.remove_star(request.user)
+    return respond(request, 'field_star.html', {'field': request.field})

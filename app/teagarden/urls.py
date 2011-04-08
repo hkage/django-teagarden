@@ -45,7 +45,9 @@ urlpatterns += patterns(
     'teagarden.views',
     #('', include('helpers.urls')),
     (r'^$', 'index'),
+    (r'^(\d+)/star_field$', 'star_field'),
     (r'^(\d+)/star_table$', 'star_table'),
+    (r'^(\d+)/unstar_field$', 'unstar_field'),
     (r'^(\d+)/unstar_table$', 'unstar_table'),
     (r'^comment/(\d+)/discard$', 'discard_comment'),
     (r'^comment/(\d+)/publish$', 'publish_comment'),
@@ -59,8 +61,6 @@ urlpatterns += patterns(
     (r'^table/(\d+)$', 'table'),
     (r'^table/(\d+)/publish$', 'publish'),
     (r'^table/(\d+)/comment', 'create_comment'),
-    (r'^(\d+)/unstar_field$', 'unstar_field'),
-    (r'^(\d+)/unstar_table$', 'unstar_table'),
     (r'^user/(.+)$', 'show_user'),
     (r'^user_popup/(.+)$', 'user_popup'),
     )

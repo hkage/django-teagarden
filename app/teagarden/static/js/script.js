@@ -10,12 +10,12 @@ goog.require('goog.ui.KeyboardShortcutHandler');
 // Starred items
 
 /**
-  * Add or remove a booking star.
+  * Add or remove an object star.
   * @param {Integer} id Id of the booking entry
   * @param {String} url
   * @param {String} name
   */
-teagarden.set_table_star = function(id, url, name) {
+teagarden.set_object_star = function(id, url, name) {
   var xhr = new goog.net.XhrIo();
   goog.net.XhrIo.send('/' + base_url + id + url, function(e) {
     var xhr = e.target;
@@ -26,19 +26,35 @@ teagarden.set_table_star = function(id, url, name) {
 }
 
 /**
- * Star a booking item.
+ * Star a field item.
  * @param id
  */
-teagarden.add_table_star = function(id) {
-  teagarden.set_table_star(id, '/star_table', 'table');
+teagarden.add_field_star = function(id) {
+  teagarden.set_object_star(id, '/star_field', 'field');
 }
 
 /**
- * Unstar a booking.
+ * Unstar a field.
+ * @param id
+ */
+teagarden.remove_field_star = function(id) {
+  teagarden.set_object_star(id, '/unstar_field', 'field');
+}
+
+/**
+ * Star a table item.
+ * @param id
+ */
+teagarden.add_table_star = function(id) {
+  teagarden.set_object_star(id, '/star_table', 'table');
+}
+
+/**
+ * Unstar a table.
  * @param id
  */
 teagarden.remove_table_star = function(id) {
-  teagarden.set_table_star(id, '/unstar_table', 'table');
+  teagarden.set_object_star(id, '/unstar_table', 'table');
 }
 
 // Shortcuts

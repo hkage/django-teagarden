@@ -285,8 +285,6 @@ class Table(TimestampModel, CommentProvider, StarredItemProvider):
 
     #project.project_filter = True
 
-    _is_starred = None
-
     class Meta:
         db_table = u"tabelle"
         db_column_prefix = u"ta_"
@@ -304,15 +302,6 @@ class Table(TimestampModel, CommentProvider, StarredItemProvider):
         fields = fields.filter(foreign__isnull=False)
         fields = fields.order_by("position")
         return fields
-
-    #@property
-    #def is_starred(self):
-        #"""Whether the current user has this booking starred."""
-        #if self._is_starred is not None:
-        #    return self._is_starred
-        #account = Account.current_user_account
-        #self._is_starred = account is not None and self.id in account.starred_tables
-        #return self._is_starred
         
     @models.permalink
     def get_absolute_url(self):
@@ -342,6 +331,10 @@ class Table(TimestampModel, CommentProvider, StarredItemProvider):
         return new
 
     def count_fields(self):
+        """Returns a number of field assigned to this table.
+        
+        :returns: Integer
+        """
         return Field.objects.filter(table=self.id).count()
 
     def get_fields(self, ordered=True):
@@ -373,9 +366,8 @@ class TableType(BaseModel):
         return self.name
 
 
-class Field(TimestampModel, CommentProvider):
+class Field(TimestampModel, CommentProvider, StarredItemProvider):
 
-    _is_starred = None
     _n_comments = None
     _n_drafts = None
 
@@ -437,31 +429,6 @@ class Field(TimestampModel, CommentProvider):
     def __unicode__(self):
         return self.name
 
-    #def _get_num_comments(self, drafts_only=False):
-        #return FieldComment.objects.filter(
-            #field=self, is_draft=drafts_only).count()
-
-    @property
-    def is_starred(self):
-        """Whether the current user has this field starred."""
-        if self._is_starred is not None:
-            return self._is_starred
-        account = Account.current_user_account
-        self._is_starred = account is not None and self.id in account.starred_fields
-        return self._is_starred
-
-    #@property
-    #def num_comments(self):
-    #    if self._n_comments is None:
-    #        self._n_comments = self._get_num_comments()
-    #    return self._n_comments
-
-    #@property
-    #def num_drafts(self):
-    #    if self._n_drafts is None:
-    #        self._n_drafts = self._get_num_comments(drafts_only=True)
-    #    return self._n_drafts
-
     def full_name(self):
         """Return a qualified name by table and prefix, if given.
         
@@ -479,10 +446,6 @@ class Field(TimestampModel, CommentProvider):
         elif self.precision and not self.scaling:
             retval += " (%s)" % self.precision
         return retval
-
-    #def get_comments_by_date(self):
-        #return FieldComment.objects.filter(field=self,
-                                           #is_draft=False).order_by("created")
 
     def set_next_position(self, table=None):
         """Set the next available position for this field.
@@ -721,6 +684,7 @@ class DefaultField(TimestampModel):
 
 
 class Comment(TimestampModel):
+    """Comment model for each database model object."""
 
     content_type = models.ForeignKey(ContentType, db_column="contenttype")
     object_id = models.PositiveIntegerField(db_column="objectid")
@@ -738,6 +702,7 @@ class Comment(TimestampModel):
         
         
 class StarredItem(BaseModel):
+    """A bookmark for each database model object."""
     
     content_type = models.ForeignKey(ContentType, db_column="contenttype")
     object_id = models.PositiveIntegerField(db_column="objectid")
