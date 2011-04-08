@@ -1,3 +1,3 @@
 [submodule "app/swe"]
-   path = app/swe
-   url = git://github.com/hkage/swe-commandline
+	path = app/swe
+	url = git://github.com/hkage/swe-commandline
