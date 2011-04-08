@@ -151,6 +151,24 @@ class CommentProvider(object):
         
 class StarredItemProvider(object):
     
+    @classmethod
+    def get_starred(cls, user):
+        """Returns all objects from this class, that are starred by the user.
+        
+        :param user: A :class:`User` instance
+        :returns: Query
+        """
+        #query = cls.objects.all()
+        #ct = ContentType.objects.get_for_model(cls)
+        #return ct.starreditem_set.all()
+        #ContentType.objects.get(model="table")
+        ct = ContentType.objects.get_for_model(cls)
+        #query = StarredItem.objects.filter(content_type__pk=ct.id,
+            #user=user)
+        #print query[0].content_object, type(query[0].content_object)
+        #return query
+        return ct.starreditem_set.filter(user=user)
+    
     def is_starred(self, user):
         ct = ContentType.objects.get_for_model(self)
         query = StarredItem.objects.filter(content_type__pk=ct.id,

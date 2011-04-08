@@ -313,10 +313,8 @@ def show_user(request):
 
 @login_required
 def starred_objects(request):
-    starred_tables = models.Table.objects.filter(
-        id__in=request.user.account.starred_tables)
-    starred_fields = models.Field.objects.filter(
-        id__in=request.user.account.starred_fields)
+    starred_tables = models.Table.get_starred(request.user).select_related()
+    starred_fields = models.Field.get_starred(request.user).select_related()
     return respond(request, "starred_objects.html", {
         "starred_tables": starred_tables,
         "starred_fields": starred_fields})

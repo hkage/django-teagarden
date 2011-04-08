@@ -61,9 +61,6 @@
         <a href="{% url django.contrib.auth.views.logout %}">{% trans "Sign out" %}</a>
       {% endif %}
     </div>
-    <form id="searchform" method="get" action="/search/">
-      <input id="s" type="text" onblur="if ($('#s').val().trim()==''){$('#s').val('Search');}" onfocus="if ($('#s').val()=='Search'){$('#s').val('');}" value="Search" name="s"/>
-    </form>
 
   <div class="navigation">
     <ul>

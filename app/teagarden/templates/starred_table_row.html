@@ -2,8 +2,8 @@
 <tr>
     <td class="first" width="20">{% include "table_star.html" %}</td>
     <td width="40" style="text-align: right;"><a href="/table/{{ table.id }}">{{ table.id }}</a></td>
-    <td><a href="/project/{{ table.project.id }}">{{ table.project }}</a></td>
-    <td><a href="/table/{{ table.id }}">{{ table.name }}</a></td>
+    <td><a href="{% url teagarden.views.project table.project.id %}">{{ table.project }}</a></td>
+    <td><a href="{% url teagarden.views.table table.id %}">{{ table.name }}</a></td>
     <td>
       {% if table.short_description %}
         {{ table.short_description|truncatewords:5 }}
@@ -11,5 +11,5 @@
         ({% trans "No description" %})
       {% endif %}
     </td>
-    <td class="last">{{ table.updated|timesince }}, <a onmouseover="JS_showInfoPopup(this, 'userPopupDiv', 'mailto', '/user_popup/')" href="/user/{{ table.updated_by.id }}">{{ table.updated_by }}</a></td>
+    <td class="last">{{ table.updated|timesince }}, {{ table.updated_by_id|show_user_link }}</td>
 </tr>

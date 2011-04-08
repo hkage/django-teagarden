@@ -4,7 +4,7 @@
 {% block dashboard-content %}
   <h2>{% trans "Starred objects" %}</h2>
   <h3>
-    <a id="starred-tables-pointer" href="javascript:JS_toggleSection('starred-tables');" class="toggled-section opentriangle">{% trans "Starred tables" %}</a>
+    <a id="starred-tables-pointer" href="javascript:teagarden.toggle_section('starred-tables');" class="toggled-section opentriangle">{% trans "Starred tables" %}</a>
   </h3>
   <div id="starred-tables" class="default-list">
     <div class="pagination">
@@ -14,8 +14,8 @@
         {% include "starred_table_heading.html" %}
       </thead>
       <tbody>
-        {% for table in starred_tables %}
-          {% include "starred_table_row.html" %}
+        {% for x in starred_tables %}
+          {% include "starred_table_row.html" with table=x.content_object %}
         {% empty %}
           <tr><td colspan="6">{% trans "No entries found" %}</td></tr>
         {% endfor %}
@@ -23,7 +23,7 @@
     </table>
   </div>
   <h3>
-    <a id="starred-fields-pointer" href="javascript:JS_toggleSection('starred-fields');" class="toggled-section opentriangle">{% trans "Starred fields" %}</a>
+    <a id="starred-fields-pointer" href="javascript:teagarden.toggle_section('starred-fields');" class="toggled-section opentriangle">{% trans "Starred fields" %}</a>
   </h3>
   <div id="starred-fields" class="default-list">
     <div class="pagination">
@@ -33,8 +33,8 @@
         {% include "starred_field_heading.html" %}
       </thead>
       <tbody>
-        {% for field in starred_fields %}
-          {% include "starred_field_row.html" %}
+        {% for x in starred_fields %}
+          {% include "starred_field_row.html" with field=x.content_object %}
         {% empty %}
           <tr><td colspan="7">{% trans "No entries found" %}</td></tr>
         {% endfor %}
