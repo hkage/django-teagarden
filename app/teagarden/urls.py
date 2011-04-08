@@ -45,6 +45,8 @@ urlpatterns += patterns(
     'teagarden.views',
     #('', include('helpers.urls')),
     (r'^$', 'index'),
+    (r'^(\d+)/star_table$', 'star_table'),
+    (r'^(\d+)/unstar_table$', 'unstar_table'),
     (r'^comment/(\d+)/discard$', 'discard_comment'),
     (r'^comment/(\d+)/publish$', 'publish_comment'),
     (r'^dashboard$', 'dashboard'),

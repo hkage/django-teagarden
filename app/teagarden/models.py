@@ -147,7 +147,27 @@ class CommentProvider(object):
     def get_comments_by_date(self):
         query = self.get_comments().filter(is_draft=False)
         return query.order_by("created")
-
+        
+        
+class StarredItemProvider(object):
+    
+    def is_starred(self, user):
+        ct = ContentType.objects.get_for_model(self)
+        query = StarredItem.objects.filter(content_type__pk=ct.id,
+            object_id=self.id, user=user)
+        return query.count() == 1
+        
+    def add_star(self, user):
+        star = StarredItem(content_object=self)
+        star.user = user
+        star.save()
+        
+    def remove_star(self, user):
+        ct = ContentType.objects.get_for_model(self)
+        query = StarredItem.objects.filter(content_type__pk=ct.id,
+            object_id=self.id, user=user)
+        query.delete()
+        
 
 class Account(User):
     """Extends the django default user."""
@@ -228,7 +248,7 @@ class Project(TimestampModel):
         return Table.objects.filter(project=self.id).count()
 
 
-class Table(TimestampModel, CommentProvider):
+class Table(TimestampModel, CommentProvider, StarredItemProvider):
 
     id = models.AutoField(primary_key=True, db_column="id",
                           verbose_name=_(u"Id"))
@@ -285,14 +305,14 @@ class Table(TimestampModel, CommentProvider):
         fields = fields.order_by("position")
         return fields
 
-    @property
-    def is_starred(self):
-        """Whether the current user has this booking starred."""
-        if self._is_starred is not None:
-            return self._is_starred
-        account = Account.current_user_account
-        self._is_starred = account is not None and self.id in account.starred_tables
-        return self._is_starred
+    #@property
+    #def is_starred(self):
+        #"""Whether the current user has this booking starred."""
+        #if self._is_starred is not None:
+        #    return self._is_starred
+        #account = Account.current_user_account
+        #self._is_starred = account is not None and self.id in account.starred_tables
+        #return self._is_starred
         
     @models.permalink
     def get_absolute_url(self):
@@ -715,3 +735,20 @@ class Comment(TimestampModel):
         db_column_prefix = u"kom_"
         verbose_name = _("Comment")
         verbose_name_plural = _(u"Comments")
+        
+        
+class StarredItem(BaseModel):
+    
+    content_type = models.ForeignKey(ContentType, db_column="contenttype")
+    object_id = models.PositiveIntegerField(db_column="objectid")
+    content_object = generic.GenericForeignKey("content_type", "object_id")
+    user = models.ForeignKey(User, blank=True, null=True, editable=False,
+                             db_column="userid",
+                             related_name="%(class)s_creator",
+                             verbose_name=_(u"User"))
+
+    class Meta:
+        db_table = u"lesezeichen"
+        db_column_prefix = u"lez_"
+        verbose_name = _("Starred item")
+        verbose_name_plural = _(u"Starred items")

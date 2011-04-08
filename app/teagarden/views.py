@@ -432,3 +432,17 @@ def user_popup(request):
         # Return HttpResponse because the JS part expects a 200 status code.
         return HttpResponse('<font color="red">Error: %s; please report!</font>' %
                             err.__class__.__name__)
+                            
+                            
+@login_required
+@decorators.table_required
+def star_table(request):
+    request.table.add_star(request.user)
+    return respond(request, 'table_star.html', {'table': request.table})
+    
+    
+@login_required
+@decorators.table_required
+def unstar_table(request):
+    request.table.remove_star(request.user)
+    return respond(request, 'table_star.html', {'table': request.table})

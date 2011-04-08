@@ -14,7 +14,7 @@ from django.forms import Form
 from django.utils.html import mark_safe
 from django.utils.translation import ugettext as _
 
-from teagarden.models import Account
+from teagarden.models import Account, StarredItemProvider
 
 register = template.Library()
 
@@ -58,7 +58,17 @@ def field_errors(form):
     if "__all__" in errors:
         del errors["__all__"]
     return errors
+    
 
+@register.filter
+def is_starred(obj, user):
+    """Check, whether an object is starred by the current.user.
+    
+    :returns: ``True`` or ``False``
+    """
+    assert isinstance(obj, StarredItemProvider)
+    return obj.is_starred(user)
+    
 
 @register.filter
 def nickname(user):

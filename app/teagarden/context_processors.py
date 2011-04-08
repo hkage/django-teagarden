@@ -2,6 +2,7 @@
 
 import os
 
+from django.conf import settings
 import django.template
 
 import models
@@ -31,6 +32,7 @@ def library(request):
     params["account"] = account
     params["counter"] = counter
     params["is_dev"] = IS_DEV
+    params["BASE_URL"] = settings.BASE_URL
     if request.session.get("project", 0):
         params["selected_project"] = request.session["project"]
     if "/admin/" in request.path:

@@ -586,6 +586,12 @@ class CommentAdmin(ModelAdmin):
     list_display = ("content_type", "object_id", "content_object", "is_draft",
                     "text", "created", "created_by", "updated", "updated_by")
     list_display_links = ("content_type",)
+    
+    
+class StarredItemAdmin(ModelAdmin):
+    
+    list_display = ("content_type", "object_id", "content_object", "user")
+    list_display_links = ("content_type",)
 
 
 class TableGroupAdmin(ModelAdmin):
@@ -640,6 +646,7 @@ admin.site.register(models.Group, GroupAdmin)
 admin.site.register(models.Key, KeyAdmin)
 admin.site.register(models.Project, ProjectAdmin)
 admin.site.register(models.Property, PropertyAdmin)
+admin.site.register(models.StarredItem, StarredItemAdmin)
 admin.site.register(models.Table, TableAdmin)
 #admin.site.register(models.TableComment, TableCommentAdmin)
 admin.site.register(models.TableGroup, TableGroupAdmin)

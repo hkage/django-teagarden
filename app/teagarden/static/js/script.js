@@ -4,7 +4,42 @@ goog.provide('teagarden.shortcuts');
 
 goog.require('goog.dom');
 goog.require('goog.events');
+goog.require('goog.net.XhrIo');
 goog.require('goog.ui.KeyboardShortcutHandler');
+
+// Starred items
+
+/**
+  * Add or remove a booking star.
+  * @param {Integer} id Id of the booking entry
+  * @param {String} url
+  * @param {String} name
+  */
+teagarden.set_table_star = function(id, url, name) {
+  var xhr = new goog.net.XhrIo();
+  goog.net.XhrIo.send('/' + base_url + id + url, function(e) {
+    var xhr = e.target;
+    var response = xhr.getResponseText();
+    var el = goog.dom.getElement(name + '-star-' + id);
+    el.innerHTML = response;
+  });
+}
+
+/**
+ * Star a booking item.
+ * @param id
+ */
+teagarden.add_table_star = function(id) {
+  teagarden.set_table_star(id, '/star_table', 'table');
+}
+
+/**
+ * Unstar a booking.
+ * @param id
+ */
+teagarden.remove_table_star = function(id) {
+  teagarden.set_table_star(id, '/unstar_table', 'table');
+}
 
 // Shortcuts
 
