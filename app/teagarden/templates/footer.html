@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<div style="text-align: center;">
+  {% trans "Shortcuts" %}: <strong>d</strong> - {% trans "Dashboard" %} <strong>m</strong> - {% trans "publish comments" %} <strong>?</strong> - {% trans "more shortcuts" %}
+</div>
+
+<div class="footerRight">
+  <img src="{{ STATIC_URL }}img/rss.gif" alt="RSS Feeds" width="14" height="14" align="top">
+  <a href="/rss/comments">{% trans "Recent comments" %}</a>
+  |
+  <a href="/admin">{% trans "Test" %}</a>
+</div>
+<div class="footerLeft"></div>

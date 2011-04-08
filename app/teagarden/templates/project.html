@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Project" %} {{ project.id }}: {{ project.name }}
+{% endblock %}
+
+{% block breadcrumbs %}
+  <strong>{% trans "Language" %}</strong>
+  <select id="test">
+    <option value="1">PostgreSQL</option>
+  </select>
+  <input type="submit" value="{% trans "Download" %}">
+  <input type="submit" value="{% trans "Preview" %}">
+{% endblock %}
+
+{% block page-title %}
+  {% trans "Project" %} <a href="">{{ project.id }}</a>: {{ project.name }}
+{% endblock %}
+
+{% block content %}
+
+  <h3>
+    <a id="project-description-pointer" href="javascript:teagarden.toggle_section('project-description');" class="toggled-section opentriangle">{% trans "Description" %}</a>
+  </h3>
+  <div id="project-description" style="margin-left: 15px;">
+    <code>
+      {% if project.description %}
+        {{ project.description }}
+      {% else %}
+        ({% trans "No description" %})
+      {% endif %}
+    </code>
+  </div>
+
+  <h3>
+    <a id="project-tables-pointer" href="javascript:teagarden.toggle_section('project-tables');" class="toggled-section opentriangle">{% trans "Tables" %}</a>
+  </h3>
+
+  <div id="project-tables" class="default-list">
+    <div class="pagination">
+      <div style="float: left">
+        {% trans "Select" %}:
+        <a href="{% url teagarden.views.project project.id %}">{% trans "All" %},</a>
+        {% for type in types %}
+          <a href="{% url teagarden.views.project project.id %}?type={{ type.id }}">
+            {{ type.name }}
+          </a>{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      </div>
+      <form action="" method="GET">
+        {% csrf_token %}
+        {{ form.group.label }}: {{ form.group }} <input type="submit" value="{% trans "Show" %}">
+      </form>
+    </div>
+    <table id="table-list" class="tables">
+      <thead>
+        {% include "table_heading.html" %}
+      </thead>
+      <tbody>
+        {% for table in tables %}
+          {% include "table_row.html" %}
+        {% empty %}
+          <tr><td colspan="11" class="first last">{% trans "No entries found" %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

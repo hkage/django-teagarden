@@ -1,0 +1,25 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>
+	{% block title %}TITLE GOES HERE{% endblock %} - Inhouse-Web
+  </title>
+  <link rel="icon" type="image/png" href="/static/img/favicon.png" />
+  <link rel="stylesheet" type="text/css" media="all" href="/static/css/teagarden.css" />
+  <script type="text/javascript" src="/static/js/jquery.js"></script>
+  <script type="text/javascript" src="/static/js/shortcuts.js"></script>
+  <script type="text/javascript" src="/static/js/script.js"></script>
+</head>
+<body>
+  <div class="body">
+	<div class="main">
+	  <div class="main-inner">
+		<div class="container">
+		  {% block content %}BODY GOES HERE{% endblock %}
+		</div>
+	  </div>
+	</div>
+  </div>
+</body>

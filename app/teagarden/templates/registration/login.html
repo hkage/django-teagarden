@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <form action="" method="post">
+  {% csrf_token %}
+	<div class="module">
+	  <h3 class="header" id="blue">
+		{% trans 'Login' %}
+	  </h3>
+	  <div class="body" id="blue">
+		<div class="clearfix after">
+		  <label for="id_username">{{ form.username.label }}:</label>
+		  {{ form.username }}
+		</div>
+		<div class="clearfix after">
+		  <label for="id_password">{{ form.password.label }}:</label>
+		  {{ form.password }}
+		</div>
+		<input type="submit" value="Submit">
+	  </div>
+  </form>
+{% endblock %}

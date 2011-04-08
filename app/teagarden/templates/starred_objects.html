@@ -1,0 +1,44 @@
+{% extends "dashboard.html" %}
+{% load i18n %}
+
+{% block dashboard-content %}
+  <h2>{% trans "Starred objects" %}</h2>
+  <h3>
+    <a id="starred-tables-pointer" href="javascript:JS_toggleSection('starred-tables');" class="toggled-section opentriangle">{% trans "Starred tables" %}</a>
+  </h3>
+  <div id="starred-tables" class="default-list">
+    <div class="pagination">
+    </div>
+    <table id="table-list" class="tables">
+      <thead>
+        {% include "starred_table_heading.html" %}
+      </thead>
+      <tbody>
+        {% for table in starred_tables %}
+          {% include "starred_table_row.html" %}
+        {% empty %}
+          <tr><td colspan="6">{% trans "No entries found" %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <h3>
+    <a id="starred-fields-pointer" href="javascript:JS_toggleSection('starred-fields');" class="toggled-section opentriangle">{% trans "Starred fields" %}</a>
+  </h3>
+  <div id="starred-fields" class="default-list">
+    <div class="pagination">
+    </div>
+    <table id="field-list" class="fields">
+      <thead>
+        {% include "starred_field_heading.html" %}
+      </thead>
+      <tbody>
+        {% for field in starred_fields %}
+          {% include "starred_field_row.html" %}
+        {% empty %}
+          <tr><td colspan="7">{% trans "No entries found" %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

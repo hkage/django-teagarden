@@ -1,0 +1,11 @@
+<span id="table-star-{{table.id}}">
+  {% if table.is_starred %}
+    <a href="javascript:JS_removeTableStar({{ table.id }})">
+      <img class="star" src="{{ STATIC_URL }}img/cleardot.gif"></a>
+  {% else %}
+    {% if request.user %}
+      <a href="javascript:JS_addTableStar({{ table.id }})">
+	<img class="unstar" src="{{ STATIC_URL }}img/cleardot.gif"></a>
+    {% endif %}
+  {% endif %}
+</span>

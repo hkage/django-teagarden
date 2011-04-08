@@ -1,0 +1,71 @@
+#header {
+  background: #2c2c2c;
+  color: #96bf2a;
+}
+
+#header label {
+  color: #96bf2a;
+  font-size: 11px;
+}
+
+#branding h1 {
+  color: #96bf2a;
+}
+
+div#footer {
+  text-align: center;
+}
+
+.aligned label {
+  width: 12em !important;
+}
+
+.row1 {
+  background: #f0ffc8;
+}
+
+a:link, a:visited {
+  color: #4b630a;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.module h2, .module caption, .inline-group h2 {
+  background: #C8E3AC;
+  color: black;
+}
+
+fieldset.collapsed h2 {
+  background: #e1e1e1 !important;
+  color: #555555 !important;
+}
+
+input, textarea, select, .form-row p {
+  font-size: 12px;
+}
+
+a.section:link, a.section:visited {
+  color: black;
+}
+
+#header {
+  height: 42px;
+}
+
+#usertools input[type="submit"], textarea, select {
+  font-size: 11px !important;
+}
+
+#usertools .button, input[type="submit"], input[type="button"], .submit-row input {
+ font-size: 11px !important;
+}
+
+.button.default, input[type="submit"].default, .submit-row input.default {
+  border: 2px solid #263a10;
+  background: #455c2b;
+  font-weight: bold;
+  color: white;
+  float: right;
+}

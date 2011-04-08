@@ -1,0 +1,25 @@
+{% load i18n %}
+{% load teagarden_filters %}
+{% if form.errors %}
+  <div class="message-box error"
+    <h2>{% trans "Error message(s)" %}</h2>
+    {% if form|all_errors %}
+      <strong>{% trans "General errors" %}</strong>
+      <ul>
+      {% for error in form|all_errors %}
+        <li>{{ error }}<li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    {% if form|field_errors %}
+      <strong>{% trans "Field errors" %}</strong>
+      <ul>
+      {% for field in form %}
+        {% for error in field.errors %}
+          <li><strong>{{ field.label }}:</strong> {{ error|escape }}</li>
+        {% endfor %}
+      {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endif %}

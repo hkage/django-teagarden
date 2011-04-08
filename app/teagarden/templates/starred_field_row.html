@@ -1,0 +1,16 @@
+{% load i18n %}
+<tr>
+    <td class="first" width="20">{% include "field_star.html" %}</td>
+    <td width="40" style="text-align: right;">{{ field.id }}</td>
+    <td><a href="/project/{{ field.table.project.id }}">{{ field.table.project }}</a></td>
+    <td><a href="/table/{{ field.table.id }}">{{ field.table.name }}</a></td>
+    <td>{{ field.name }}</td>
+    <td>
+      {% if field.short_description %}
+        {{ field.short_description|truncatewords:5 }}
+      {% else %}
+        ({% trans "No description" %})
+      {% endif %}
+    </td>
+    <td class="last">{{ field.updated|timesince }}, <a onmouseover="JS_showInfoPopup(this, 'userPopupDiv', 'mailto', '/user_popup/')" href="/user/{{ field.updated_by.id }}">{{ field.updated_by }}</a></td>
+</tr>

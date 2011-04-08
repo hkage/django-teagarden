@@ -1,0 +1,30 @@
+{% load i18n %}
+<tr>
+  <td width="15" class="first">
+    <input id="table_id" class="JS_setTableRowColor(this.value, 'table_id');" type="checkbox" onclick="" title="" value="{{ table.id }}" name="table_ids"/>
+  </td>
+  <td width="20">{% include "table_star.html" %}</td>
+  <td width="40" style="text-align: right;"><a href="{% url teagarden.views.table table.id %}">{{ table.id }}</a></td>
+  <td><a href="{% url teagarden.views.table table.id %}">{{ table.name }}</a></td>
+  <td>{{ table.type }}</td>
+  <td width="30" style="text-align: center;">{{ table.prefix }}</td>
+  <td>
+    {% if table.short_description %}
+      {{ table.short_description|truncatewords:10 }}
+    {% else %}
+      ({% trans "No description" %})
+    {% endif %}
+  </td>
+  <td style="text-align: center;">{{ table.count_fields }}</td>
+  <td style="text-align: left;">
+    {% if table.count_comments %}
+      {{ table.count_comments }}
+    {% endif %}
+    {% if table.count_drafts %}
+      <span style="color: red; font-weight:bold;">
+        + {{ table.count_drafts }} {% trans "Drafts" %}
+      </span>
+    {% endif %}
+  </td>
+  <td class="last">{{ table.updated|timesince }}, {{ table.updated_by_id|show_user_link }}</td>
+</tr>

@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Table" %} {{ table.id }}: {{ table.name }}
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block page-title %}
+  {% if table and table.id %}
+    {% include "table_star.html" %}
+  {% endif %}
+  {% trans "Table" %} <a href="">{{ table.id }}</a>: {{ table.name }}
+{% endblock %}
+
+{% block content %}
+
+  <table border="0" width="100%">
+    <tbody>
+      <tr valign="top">
+        <td class="meta" width="20%">
+          <div>
+            <strong>{% trans "Project" %}:</strong><br/>
+              <strong><a href="{% url teagarden.views.project table.project.id %}">
+                {{ table.project.name }}
+              </a></strong><br/>
+            <strong>{% trans "Type" %}:</strong><br/>
+              {{ table.type }}
+          </div>
+          <div>
+            <strong>{% trans "Short description" %}:</strong><br/>
+              {% if table.short_description %}
+                {{ table.short_description|truncatewords:10 }}
+              {% else %}
+                ({% trans "No description" %})
+              {% endif %}
+          </div>
+          <div>
+            <br/><strong>{% trans "Created" %}:</strong><br/>
+              {{ table.created|date }} {% trans "by" %} {{ table.created_by_id|show_user_link }}</a>
+          </div>
+          <div>
+            <strong>{% trans "Updated" %}:</strong><br/>
+            {{ table.updated|date }} {% trans "by" %} {{ table.updated_by_id|show_user_link }}</a>
+          </div>
+          <div>
+            <br/><a href="{% url teagarden.views.project table.project.id %}">{% trans "Back" %}</a>
+          </div>
+        </td>
+
+        <td style="padding-left: .8em; padding-right: .8em; width:80%;">
+        {% if draft_count %}
+        <div class="error">
+          {% trans "You have <strong>unpublished comments</strong>. Other users won't see them unless you publish them." %}
+        </div>
+        {% endif %}
+        <h3>
+          <a id="table-description-pointer" href="javascript:teagarden.toggle_section('table-description');" class="toggled-section opentriangle">{% trans "Description" %}</a>
+        </h3>
+        <div id="table-description">
+          <code>
+            {% if table.description %}
+              {{ table.description }}
+            {% else %}
+              ({% trans "No description" %})
+            {% endif %}
+          </code>
+        </div>
+        <h3>
+          <a id="table-fields-pointer" href="javascript:teagarden.toggle_section('table-fields');" class="toggled-section opentriangle">{% trans "Fields" %}</a>
+        </h3>
+        <div id="table-fields" class="default-list">
+          <div class="pagination">
+          </div>
+          <table id="field-list" class="fields">
+            <thead>
+              {% include "field_heading.html" %}
+            </thead>
+            <tbody>
+              {% for field in fields %}
+                {% include "field_row.html" %}
+              {% empty %}
+                <tr><td colspan="12">{% trans "No entries found" %}</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+          <h3>
+            <a id="table-references-pointer" href="javascript:teagarden.toggle_section('table-references');" class="toggled-section opentriangle">{% trans "Referenced by" %}</a>
+          </h3>
+
+          <div id="table-references" class="default-list">
+            <div class="pagination">
+            </div>
+            <table id="field-list" class="fields">
+              <thead>
+                {% include "reference_heading.html" %}
+              </thead>
+              <tbody>
+                {% for ref in references %}
+                  {% include "reference_row.html" %}
+                {% empty %}
+                  <tr><td class="first last" colspan="5">{% trans "No entries found" %}</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <h3>
+            <a id="table-comments-pointer" href="javascript:teagarden.toggle_section('table-comments');" class="toggled-section opentriangle">{% trans "Comments" %}</a>
+          </h3>
+
+
+          <div id="table-comments">
+
+          <div>
+            <i>{% trans "total" %}: {{ comment_count }} {% if draft_count %} <span style="color: red;"><strong>+{{ draft_count }} {% trans "Drafts" %}</strong></span>{% endif %}</i>
+          </div>
+
+          {% if comments %}
+          <div>
+            <a href="javascript:teagarden.show_all_comments('cl', {{ comments|length }})">
+            {% trans "Expand all comments" %}</a>
+            |
+            <a href="javascript:teagarden.hide_all_comments('cl', {{ comments|length }})">
+            {% trans "Collapse all comments" %}</a>
+          </div>
+          {% endif %}
+
+          {% for comment in comments %}
+            <div class="comment">
+              <div class="header">
+                <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                  <tr class="comment_title"
+                    onclick="teagarden.switch_changelist_comment({{forloop.counter0}})">
+                  <td style="padding-left: 5px; white-space: nowrap;">
+                    {% if comment.is_draft %}
+                      <b>({% trans "Draft" %})</b>
+                    {% else %}
+                      <b>{{ comment.created_by|nickname }}</b>
+                    {% endif %}
+                  </td>
+                  <td width="100%">
+                    <table style="table-layout:fixed; white-space: nowrap;"
+                      width="100%">
+                    <tr>
+                      <td>
+                        <div style="margin-left: 5px; white-space: nowrap; overflow: hidden;{%if forloop.last%} visibility: hidden;{%endif%}"
+                          class="extra"
+                          id="cl-preview-{{ forloop.counter0 }}">
+                          {{ comment.text|truncatewords:15 }}
+
+          </div>
+        </td>
+        </tr>
+        </table>
+        </td>
+        <td align="right"
+          style="white-space: nowrap; padding-right: 5px;">
+        {{ comment.created|timesince }} {% trans "ago" %}
+        </td>
+        </tr>
+        </table>
+        </div>
+
+          <div id="cl-comment-{{ forloop.counter0 }}"
+            {% if forloop.last %}
+            {% else %}
+              style="display: none;"
+          {% endif %}>
+          <div class="comment-body">
+            <pre class="cl-comment-{{ forloop.counter0 }}" name="cl-comment-{{ forloop.counter0 }}">{{ comment.text|wordwrap:80|urlize }}</pre>
+          </div>
+          <div class="comment-actions">
+            
+            {% if user %}
+              {% if not comment.is_draft %}
+              <div id="comment-actions-{{ comment.id }}">
+                <a href="javascript:teagarden.comments.reply('{{forloop.counter0}}', '{{comment.created|date:"Y/m/d H:i:s"}}', '{{comment.created_by}}')"
+                  id="comment-reply-href-{{forloop.counter0}}">{% trans "Reply" %}</a>
+              </div>
+              <div id="comment-reply-{{forloop.counter0}}"
+                style="display:none;"></div>
+              {% else %}
+                <a href="{% url teagarden.views.publish_comment comment.id %}">{% trans "Publish" %}</a>
+                |
+                <a href="{% url teagarden.views.discard_comment comment.id %}">{% trans "Discard" %}</a>
+              {% endif %}
+            {% else %}
+              <a href="{{ sign_in }}">{% trans "Sign in" %}</a> {% trans "to reply to this comment" %}.
+            {% endif %}
+          </div>
+          </div>
+
+          </div>
+        {%endfor%}
+
+          {% if comments %}
+          <div>
+            <a href="javascript:teagarden.show_all_comments('cl', {{ comments|length }})">
+            {% trans "Expand all comments" %}</a>
+            |
+            <a href="javascript:teagarden.hide_all_comments('cl', {{ comments|length }})">
+            {% trans "Collapse all comments" %}</a>
+          </div>
+          {% endif %}
+
+          {% if user %}
+            <div style="display:none;">
+            <form method="POST" action="{% url teagarden.views.create_comment table.id %}"
+              id="comment-reply-form">
+              {% csrf_token %}
+            <div>
+              <textarea rows="7" cols="70" name="message"></textarea>
+            </div>
+            <input type="hidden" name="subject" value="{{ issue.subject }}" />
+            <input type="hidden" name="message_only" value="1" />
+            <input class="submit" type="submit" value="{% trans "Send Message" %}" />
+            <input class="submit" type="button" value="{% trans "Discard" %}" name="discard" />
+            </form>
+            </div>
+            <a id="resizer" class="resizer" style="display:none;cursor:pointer">
+              <img class="zippy-plus" src="{{ STATIC_URL }}img/cleardot.gif">
+            </a>
+            </div>
+          {% endif %}
+
+        </td>
+    </tr>
+  </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load teagarden_filters %}
+
+{% block title %}
+  {% trans "User" %} {{ user.id }}: {{ user|nickname}}
+{% endblock %}
+
+{% block page-title %}
+  {% trans "User" %} <a href="">{{ user.id }}</a>: {{ user|nickname }}
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

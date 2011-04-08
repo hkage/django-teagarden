@@ -1,0 +1,14 @@
+{% load i18n %}
+<tr>
+  <td style="vertical-align: top; text-align: right" width="40">
+    <a href="{% url teagarden.views.table ref.id %}">{{ ref.id }}</a>
+  </td>
+  <td style="vertical-align: top;"><a href="{% url teagarden.views.table ref.id %}">{{ ref.name }}</a></td>
+  <td>
+    <table>
+    {% for field in ref.foreign_keys %}
+      <tr><td>{{ field.full_name }}</td></tr>
+    {% endfor %}
+    </table>
+  </td>
+</tr>

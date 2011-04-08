@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+    {% trans "You have been successfully logged out." %}
+    <br/><br/>
+    <a href="/signin">{% trans "Login again" %}</a>
+
+
+{% endblock %}

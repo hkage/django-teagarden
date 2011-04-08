@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Dashboard" %}{% endblock %}
+
+{% block page-title %}
+  {% trans "Dashboard" %}
+{% endblock %}
+
+{% block content %}
+
+  <table border="0" width="100%">
+    <tbody>
+      <tr valign="top">
+        <td class="meta" width="15%">
+          {% include "dashboard_sidebar.html" %}
+        </td>
+        <td style="padding-left: .8em; padding-right: .8em; width:80%; vertical-align: top;">
+          {% block dashboard-content %}{% endblock %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

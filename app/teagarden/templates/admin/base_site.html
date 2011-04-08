@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block extrahead %}
+  <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.png">
+{% endblock %}
+
+{% block extrastyle %}
+  <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/admin.css?v=1">
+{% endblock %}
+
+{% block title %}{{ title }} | {% trans 'Teagarden site admin' %}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">Teagarden {% trans "administration" %}</h1>
+{% endblock %}
+
+{% block footer %}
+  <div id="footer">
+    {% trans "This is" %} <a target="_blank" href="http://django-teagarden.googlecode.com">Teagarden</a>
+  </div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page-title %}
+  {% if table and table.id %}
+    {% include "table_star.html" %}
+  {% endif %}
+  {% trans "Table" %} <a href="">{{ table.id }}</a>: {{ table.name }}
+{% endblock %}
+
+{% block content %}
+  <table border="0" width="100%">
+    <tbody>
+      <tr valign="top">
+        <td class="meta" width="20%">
+          <div>
+            <strong>{% trans "Project" %}:</strong><br/>
+              <strong><a href="{% url teagarden.views.project table.project.id %}">
+                {{ table.project.name }}
+              </a></strong><br/>
+            <strong>{% trans "Type" %}:</strong><br/>
+              {{ table.type }}
+          </div>
+          <div>
+            <strong>{% trans "Short description" %}:</strong><br/>
+              {% if table.short_description %}
+                {{ table.short_description|truncatewords:10 }}
+              {% else %}
+                ({% trans "No description" %})
+              {% endif %}
+          </div>
+          <div>
+            <br/><strong>{% trans "Created" %}:</strong><br/>
+              {{ table.created|date }} {% trans "by" %} {{ table.created_by_id|show_user_link }}</a>
+          </div>
+          <div>
+            <strong>{% trans "Updated" %}:</strong><br/>
+            {{ table.updated|date }} {% trans "by" %} {{ table.updated_by_id|show_user_link }}</a>
+          </div>
+          <div>
+            <br/><a href="{% url teagarden.views.project table.project.id %}">{% trans "Back" %}</a>
+          </div>
+        </td>
+        <td style="padding-left: .8em; padding-right: .8em; width:80%; vertical-align: top;">
+          <form method="post">
+            {% csrf_token %}
+            <h3>{% trans "Publish comment" %}</h3>     
+            <table>
+              <tr>
+                <td><label for="id_message">{{ form.message.label }}:</label></td>
+                <td>{{ form.message }}</td>
+              </tr>
+              <tr>
+                <td></td>
+                  <td>
+                    <input name="save" type="submit" value="{% trans "Publish" %}">
+                    <input name="cancel" type="submit" value="{% trans "Cancel" %}">
+                  </td>
+              </tr>
+            </table>
+          </form>
+        </td>
+    </tr>
+  </tbody>
+  </table>
+{% endblock %}
