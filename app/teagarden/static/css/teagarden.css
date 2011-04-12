@@ -82,31 +82,31 @@ img {
 }
 
 img.star {
-    background: url(/static/img/icons.png) no-repeat -20px -0px;
+    background: url(../img/icons.png) no-repeat -20px -0px;
     heigth: 15px;
     width: 15px;
 }
 
 img.unstar {
-    background: url(/static/img/icons.png) no-repeat -0px -0px;
+    background: url(../img/icons.png) no-repeat -0px -0px;
     heigth: 15px;
     width: 15px;
 }
 
 img.zippy-plus {
-    background: url(/static/img/icons.png) no-repeat -40px -0px;
+    background: url(../img/icons.png) no-repeat -40px -0px;
     heigth: 15px;
     width: 15px;
 }
 
 img.open-triangle {
-    background: url(/static/img/icons.png) no-repeat -60px -0px;
+    background: url(../img/icons.png) no-repeat -60px -0px;
     heigth: 7px;
     width: 7px;
 }
 
 img.closed-triangle {
-    background: url(/static/img/icons.png) no-repeat -70px -0px;
+    background: url(../img/icons.png) no-repeat -70px -0px;
     heigth: 7px;
     width: 7px;
 }

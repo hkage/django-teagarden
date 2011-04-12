@@ -90,6 +90,7 @@ def show_user_link(user_id):
         user = User.objects.filter(id=user_id)[0]
         account = Account.get_account_for_user(user)
         url = reverse("teagarden.views.show_user", args=[user.id])
+        # TODO: Doesn't respecht the BASE_URL currently
         ret = """<a onmouseover="teagarden.show_popup(this, 'user', 'user_popup/')"
         href="%(url)s">%(name)s</a>"""  \
             % {"url": url, "name": cgi.escape(account.nickname)}
