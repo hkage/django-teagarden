@@ -175,8 +175,8 @@ class TableAdmin(ModelAdmin):
             "fields": ("short_description", "description")}),
         (_(u"Database settings"), {
             "classes": ("collapse",),
-            "fields": ["first_extension", "next_extension", "db_space",
-                       "lock_mode", "storage_clause"]}),
+            "fields": ["first_extension", "next_extension", "lock_mode", 
+                       "storage_clause"]}),
         (_(u"Timestamp"), {
             "classes": ("collapse",),
             "fields": ["created", "created_by", "updated", "updated_by"]})

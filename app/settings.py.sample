@@ -167,6 +167,7 @@ LOGGING = {
 
 if DEBUG:
     INSTALLED_APPS += (
+        'south',
         'debug_toolbar',
         'django_extensions')
     MIDDLEWARE_CLASSES += (

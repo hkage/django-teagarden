@@ -18,6 +18,11 @@ options.DEFAULT_NAMES += ("db_column_prefix",)
 import filter
 
 
+BOOLEAN_CHOICES = (
+    (0, _(u"False")),
+    (1, _(u"True"))
+)
+
 LOOKUP_CHOICES = (
     (u"L", _(u"Lookup")),
     (u"D", _(u"Detail"))
@@ -37,8 +42,25 @@ def save_user_trigger(sender, instance, **kwds):
 
 
 class ColumnPrefixModelMeta(models.base.ModelBase):
+    """Metaclass that provides an easy way to set column prefixes.
 
-    def __new__(cls, name, bases, attrs):
+    With this metaclass it's possible to use Meta.db_column_prefix to
+    define a prefix that should be used for all column names in this
+    model.
+
+    If db_column is not set it is generated from the attribute
+    name. Then the metaclass checks wether db_column starts with the
+    given prefix.
+
+    Note: To make this work you'll need to monkey-patch the available
+    Meta options like this:
+
+      from django.db.models import options
+      options.DEFAULT_NAMES += ("db_column_prefix",)
+    """
+
+    def __new__(cls, name, bases, attrs):  # pylint: disable=C0203
+        # accessing restricted _meta is intended pylint: disable=W0212
         new_cls = super(ColumnPrefixModelMeta, cls).__new__(
             cls, name, bases, attrs)
         prefix = getattr(new_cls._meta, "db_column_prefix", None)
@@ -272,9 +294,6 @@ class Table(TimestampModel, CommentProvider, StarredItemProvider):
     next_extension = models.IntegerField(db_column="next", null=True,
                                          blank=True,
                                          verbose_name=_(u"Next extension"))
-    db_space = models.IntegerField(db_column="dbspc", null=True,
-                                   blank=True,
-                                   verbose_name=_(u"Database space"))
     lock_mode = models.CharField(max_length=1, db_column="lckmode",
                                  null=True, blank=True,
                                  verbose_name=_(u"Lockmode"))
@@ -392,7 +411,8 @@ class Field(TimestampModel, CommentProvider, StarredItemProvider):
     scaling = models.CharField(max_length=12, db_column="zus2",
                                null=True, blank=True,
                                verbose_name=_(u"Scaling"))
-    primary = models.BooleanField(db_column="prim", null=False, blank=False,
+    primary = models.IntegerField(db_column="prim", null=False, blank=False,
+                                  choices=BOOLEAN_CHOICES,
                                   verbose_name=_(u"Primary"))
     foreign = models.ForeignKey("self", db_column="fremd_feid",
                                 null=True, blank=True,
@@ -401,8 +421,8 @@ class Field(TimestampModel, CommentProvider, StarredItemProvider):
     lookup = models.CharField(max_length=2, db_column="look",
                               null=True, blank=True, choices=LOOKUP_CHOICES,
                               verbose_name=_(u"Lookup?"))
-    nullable = models.BooleanField(db_column="null", null=False,
-                                   blank=False,
+    nullable = models.IntegerField(db_column="null", null=False,
+                                   blank=False, choices=BOOLEAN_CHOICES,
                                    verbose_name=_(u"Nullable"))
     mask_length = models.IntegerField(db_column="mlang", null=False,
                                       blank=False, default=0,
@@ -410,8 +430,9 @@ class Field(TimestampModel, CommentProvider, StarredItemProvider):
     default_value = models.CharField(max_length=32, db_column="default",
                                      null=True, blank=True,
                                      verbose_name=_(u"Default value"))
-    cascading_delete = models.BooleanField(db_column="loesch",
-                                           default=False,
+    cascading_delete = models.IntegerField(db_column="loesch",
+                                           default=False, 
+                                           choices=BOOLEAN_CHOICES,
                                            verbose_name=_(u"Cascading delete"))
     table = models.ForeignKey("Table", db_column="taid", null=False,
                               blank=False, related_name="fields",
@@ -491,12 +512,14 @@ class FieldType(BaseModel):
     short_name = models.CharField(max_length=3, db_column="kurz",
                                   null=False, blank=False, unique=True,
                                   verbose_name=_(u"Short name"))
-    precision = models.BooleanField(db_column="zus1", null=False,
-                                 blank=False, default=False,
-                                 verbose_name=_(u"Precision"))
-    scaling = models.BooleanField(db_column="zus2", null=False,
-                               blank=False, default=False,
-                               verbose_name=_(u"Scaling"))
+    precision = models.IntegerField(db_column="zus1", null=False,
+                                    blank=False, default=False,
+                                    choices=BOOLEAN_CHOICES,
+                                    verbose_name=_(u"Precision"))
+    scaling = models.IntegerField(db_column="zus2", null=False,
+                                  blank=False, default=False,
+                                  choices=BOOLEAN_CHOICES,
+                                  verbose_name=_(u"Scaling"))
 
     class Meta:
         db_table = u"feldtyp"
@@ -569,7 +592,8 @@ class Key(TimestampModel):
 
     id = models.AutoField(primary_key=True, db_column="id",
                           verbose_name=_(u"Id"))
-    unique = models.BooleanField(db_column="uni", default=False,
+    unique = models.IntegerField(db_column="uni", default=False,
+                                 choices=BOOLEAN_CHOICES,
                                  verbose_name=_(u"Unique"))
     table = models.ForeignKey("Table", db_column="taid",
                               verbose_name=_(u"Table"))
@@ -632,7 +656,8 @@ class DefaultField(TimestampModel):
     scaling = models.CharField(max_length=12, db_column="zus2",
                                null=True, blank=True,
                                verbose_name=_(u"Scaling"))
-    primary = models.BooleanField(db_column="prim", null=False, blank=False,
+    primary = models.IntegerField(db_column="prim", null=False, blank=False,
+                                  choices=BOOLEAN_CHOICES,
                                   verbose_name=_(u"Primary"))
     foreign = models.ForeignKey("Field", db_column="fremd_feid",
                                 null=True, blank=True,
@@ -641,8 +666,8 @@ class DefaultField(TimestampModel):
     lookup = models.CharField(max_length=2, db_column="look",
                               null=True, blank=True, choices=LOOKUP_CHOICES,
                               verbose_name=_(u"Lookup"))
-    nullable = models.BooleanField(db_column="null", null=False,
-                                   blank=False,
+    nullable = models.IntegerField(db_column="null", null=False,
+                                   blank=False, choices=BOOLEAN_CHOICES,
                                    verbose_name=_(u"Nullable"))
     mask_length = models.IntegerField(db_column="mlang", null=False,
                                       blank=False, default=0,
@@ -650,8 +675,9 @@ class DefaultField(TimestampModel):
     default_value = models.CharField(max_length=32, db_column="default",
                                      null=True, blank=True,
                                      verbose_name=_(u"Default value"))
-    cascading_delete = models.BooleanField(db_column="loesch",
+    cascading_delete = models.IntegerField(db_column="loesch",
                                            default=False,
+                                           choices=BOOLEAN_CHOICES,
                                            verbose_name=_(u"Cascading delete"))
 
     class Meta:
@@ -688,8 +714,8 @@ class Comment(TimestampModel):
     content_type = models.ForeignKey(ContentType, db_column="contenttype")
     object_id = models.PositiveIntegerField(db_column="objectid")
     content_object = generic.GenericForeignKey("content_type", "object_id")
-    is_draft = models.BooleanField(db_column="entwurf", default=True,
-        verbose_name=_(u"Is draft"))
+    is_draft = models.IntegerField(db_column="entwurf", default=True,
+        choices=BOOLEAN_CHOICES, verbose_name=_(u"Is draft"))
     text = models.CharField(db_column="txt", max_length=2000,
         verbose_name=_("Text"))
 
