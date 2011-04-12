@@ -40,10 +40,10 @@ def all_errors(form):
 @register.filter
 def bool_to_image(val):
     if not val:
-        return mark_safe('<img src="%(STATIC_URL)sstatic/img/cross.png">'
+        return mark_safe('<img src="%(STATIC_URL)simg/cross.png">'
                          % {"STATIC_URL": settings.STATIC_URL})
     else:
-        return mark_safe('<img src="%(STATIC_URL)ss/static/img/tick.png">'
+        return mark_safe('<img src="%(STATIC_URL)simg/tick.png">'
                          % {"STATIC_URL": settings.STATIC_URL})
 
 
