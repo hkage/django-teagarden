@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load teagarden_filters %}
 <tr >
   <td width="15" class="{% if field.primary %}red{% endif %} first">
     <input id="field_id" class="" type="checkbox" onclick="JS_setTableRowColor(this.value, 'field-{{ field.id }}');" title="" value="{{ field.id }}" name="field_ids"/>
