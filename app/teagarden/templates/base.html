@@ -105,8 +105,9 @@
 <script>
 var help_displayed = false;
 teagarden.shortcuts.init_handler();
+var dashboard_link = "{% url teagarden.views.dashboard %}";
 {% if table %}
-  var publish_link = "{%url teagarden.views.publish table.id %}";
+  var publish_link = "{% url teagarden.views.publish table.id %}";
 {% endif %}
 var base_url = "{{ BASE_URL }}";
 </script>
