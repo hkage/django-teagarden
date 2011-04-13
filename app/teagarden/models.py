@@ -108,7 +108,7 @@ class BaseModel(models.Model):
         elif query.count() == 1:
             return query[0]
         return query
-        
+
     def set_timestamps(self, user):
         if not self.id:
             self.created = datetime.datetime.now()
@@ -148,58 +148,70 @@ class TimestampModel(BaseModel):
 
     class Meta:
         abstract = True
-        
-        
+
+
 class CommentProvider(object):
     """Helper class for all tables, that provide a comment interface."""
-    
+
     def count_comments(self):
         query = self.get_comments().filter(is_draft=False)
         return query.count()
-        
+
     def count_drafts(self):
         query = self.get_comments().filter(is_draft=True)
         return query.count()
-        
+
     def get_comments(self):
         ct = ContentType.objects.get_for_model(self)
         return Comment.objects.filter(content_type__pk=ct.id,
                                       object_id=self.id)
-                                      
+
     def get_comments_by_date(self):
         query = self.get_comments().filter(is_draft=False)
         return query.order_by("created")
-        
-        
+
+
 class StarredItemProvider(object):
-    
+
     @classmethod
     def get_starred(cls, user):
         """Returns all objects from this class, that are starred by the user.
-        
+
         :param user: A :class:`User` instance
-        :returns: Query
+        :returns: Query of :class:`StarredItem`
         """
         ct = ContentType.objects.get_for_model(cls)
         return ct.starreditem_set.filter(user=user)
-    
+
     def is_starred(self, user):
+        """Checks, wheter the object is starred by the user.
+
+        :returns: ``True`` or ``False``
+        """
         ct = ContentType.objects.get_for_model(self)
         query = StarredItem.objects.filter(content_type__pk=ct.id,
             object_id=self.id, user=user)
         return query.count() == 1
-        
+
     def add_star(self, user):
+        """Add an :class:`StarredItem` for an object.
+
+        :param user: A :class:`User` instance
+        """
         star = StarredItem(content_object=self)
         star.user = user
         star.save()
-        
+
     def remove_star(self, user):
+        """Delete the StarredItem for an object.
+
+        :params user: A :class:`User` instance
+        """
         ct = ContentType.objects.get_for_model(self)
         query = StarredItem.objects.filter(content_type__pk=ct.id,
             object_id=self.id, user=user)
         query.delete()
-        
+
 
 class Account(User):
     """Extends the django default user."""
@@ -320,7 +332,7 @@ class Table(TimestampModel, CommentProvider, StarredItemProvider):
         fields = fields.filter(foreign__isnull=False)
         fields = fields.order_by("position")
         return fields
-        
+
     @models.permalink
     def get_absolute_url(self):
         return ('teagarden.views.table', [str(self.id)])
@@ -350,7 +362,7 @@ class Table(TimestampModel, CommentProvider, StarredItemProvider):
 
     def count_fields(self):
         """Returns a number of field assigned to this table.
-        
+
         :returns: Integer
         """
         return Field.objects.filter(table=self.id).count()
@@ -431,7 +443,7 @@ class Field(TimestampModel, CommentProvider, StarredItemProvider):
                                      null=True, blank=True,
                                      verbose_name=_(u"Default value"))
     cascading_delete = models.IntegerField(db_column="loesch",
-                                           default=False, 
+                                           default=False,
                                            choices=BOOLEAN_CHOICES,
                                            verbose_name=_(u"Cascading delete"))
     table = models.ForeignKey("Table", db_column="taid", null=False,
@@ -451,7 +463,7 @@ class Field(TimestampModel, CommentProvider, StarredItemProvider):
 
     def full_name(self):
         """Return a qualified name by table and prefix, if given.
-        
+
         :returns: Name as string
         """
         if self.table.prefix:
@@ -469,7 +481,7 @@ class Field(TimestampModel, CommentProvider, StarredItemProvider):
 
     def set_next_position(self, table=None):
         """Set the next available position for this field.
-        
+
         :param table: A :class:`Table` instance
         """
         if not table:
@@ -724,11 +736,11 @@ class Comment(TimestampModel):
         db_column_prefix = u"kom_"
         verbose_name = _("Comment")
         verbose_name_plural = _(u"Comments")
-        
-        
+
+
 class StarredItem(BaseModel):
     """A bookmark for each database model object."""
-    
+
     content_type = models.ForeignKey(ContentType, db_column="contenttype")
     object_id = models.PositiveIntegerField(db_column="objectid")
     content_object = generic.GenericForeignKey("content_type", "object_id")
