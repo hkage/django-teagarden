@@ -603,8 +603,8 @@ div.message-box {
 
 div#help {
   position: fixed;
-  right: 4%;
-  left: 4%;
+  right: 18%;
+  left: 18%;
   top: 5%;
   opacity: 0.85;
   -moz-opacity: 0.75;
@@ -614,7 +614,7 @@ div#help {
   -webkit-border-radius: 10px;
   background: black;
   color: white;
-  font-weight: bold;
+  font-weight: normal;
   padding: 1em;
   z-index: 1;
   overflow-x: hidden;
@@ -624,7 +624,7 @@ div#help {
 div#help th {
   border: 0;
   background: black;
-  color: #fffff;
+  color: #8db563;
   text-align: left;
   font-weight: bold;
 }
@@ -632,6 +632,7 @@ div#help th {
 div#help td {
   background: black;
   font-weight: normal;
+  vertical-align: top;
 }
 
 td.shortcut {
@@ -639,9 +640,10 @@ td.shortcut {
 }
 
 span.letter {
-  color: #5989e2;
+  color: #8db563;
   font-weight: bold;
   font-family: monospace;
+  font-size: medium;
 }
 
 

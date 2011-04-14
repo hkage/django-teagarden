@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-14 11:38+0200\n"
+"POT-Creation-Date: 2011-04-14 16:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgid "Fields"
 msgstr ""
 
 #: admin.py:115 models.py:33 models.py:323 models.py:451 models.py:591
-#: models.py:611 templates/base.html:38 templates/publish.html:8
+#: models.py:611 templates/publish.html:8
 #: templates/starred_field_heading.html:6 templates/table.html:5
 #: templates/table.html.py:15
 msgid "Table"
@@ -195,7 +195,7 @@ msgstr ""
 msgid "Short description"
 msgstr ""
 
-#: models.py:275 templates/base.html:68 templates/projects.html:5
+#: models.py:275 templates/base.html:88 templates/projects.html:5
 #: templates/projects.html.py:9
 msgid "Projects"
 msgstr ""
@@ -308,7 +308,7 @@ msgstr ""
 msgid "Fieldtypes"
 msgstr ""
 
-#: models.py:561 models.py:593 views.py:141
+#: models.py:561 models.py:593 views.py:124
 msgid "Group"
 msgstr ""
 
@@ -373,69 +373,86 @@ msgstr ""
 msgid "Starred items"
 msgstr ""
 
-#: views.py:123
+#: views.py:106
 msgid "Message"
 msgstr ""
 
-#: views.py:147
+#: views.py:130
 msgid "Show all"
 msgstr ""
 
-#: views.py:159
+#: views.py:142
 msgid "First name"
 msgstr ""
 
-#: views.py:161
+#: views.py:144
 msgid "Last name"
 msgstr ""
 
-#: views.py:163
+#: views.py:146
 msgid "E-mail"
 msgstr ""
 
-#: views.py:194
+#: views.py:177
 msgid "Failure"
 msgstr ""
 
-#: templates/base.html:21 templates/footer.html:9
+#: templates/base.html:21 templates/base_minimal.html:21
+#: templates/footer.html:9
 msgid "Recent comments"
 msgstr ""
 
-#: templates/base.html:25
+#: templates/base.html:28
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: templates/base.html:31
-msgid "File"
+#: templates/base.html:29
+msgid "ESC to close"
 msgstr ""
 
-#: templates/base.html:40 templates/footer.html:4
-msgid "publish comments"
+#: templates/base.html:41
+msgid "Navigation"
 msgstr ""
 
-#: templates/base.html:53 templates/table.html:193
+#: templates/base.html:44 templates/footer.html:4
+msgid "then"
+msgstr ""
+
+#: templates/base.html:45
+msgid "Go to dashboard"
+msgstr ""
+
+#: templates/base.html:55
+msgid "Timer"
+msgstr ""
+
+#: templates/base.html:59 templates/publish.html:47
+msgid "Publish comment"
+msgstr ""
+
+#: templates/base.html:73 templates/table.html:193
 msgid "Sign in"
 msgstr ""
 
-#: templates/base.html:58 templates/settings.html:5
+#: templates/base.html:78 templates/settings.html:5
 #: templates/settings.html.py:9
 msgid "Settings"
 msgstr ""
 
-#: templates/base.html:60
+#: templates/base.html:80
 msgid "Sign out"
 msgstr ""
 
-#: templates/base.html:67 templates/dashboard.html:3
+#: templates/base.html:87 templates/dashboard.html:3
 #: templates/dashboard.html.py:6 templates/footer.html:4
 msgid "Dashboard"
 msgstr ""
 
-#: templates/base.html:70
+#: templates/base.html:90
 msgid "Administration"
 msgstr ""
 
-#: templates/base.html:73 templates/admin/base.html:66
+#: templates/base.html:93 templates/admin/base.html:66
 #: templates/registration/password_reset_complete.html:4
 #: templates/registration/password_reset_confirm.html:4
 #: templates/registration/password_reset_done.html:4
@@ -486,6 +503,10 @@ msgid "Shortcuts"
 msgstr ""
 
 #: templates/footer.html:4
+msgid "publish comment"
+msgstr ""
+
+#: templates/footer.html:4
 msgid "more shortcuts"
 msgstr ""
 
@@ -530,10 +551,6 @@ msgstr ""
 
 #: templates/publish.html:41 templates/table.html:49
 msgid "Back"
-msgstr ""
-
-#: templates/publish.html:47
-msgid "Publish comment"
 msgstr ""
 
 #: templates/publish.html:56 templates/table.html:188
@@ -646,12 +663,12 @@ msgstr ""
 msgid "This is"
 msgstr ""
 
-#: templates/registration/logged_out.html:5
+#: templates/registration/logged_out.html:4
 #: templates/registration_backup/logged_out.html:5
 msgid "You have been successfully logged out."
 msgstr ""
 
-#: templates/registration/logged_out.html:7
+#: templates/registration/logged_out.html:6
 #: templates/registration_backup/logged_out.html:7
 msgid "Login again"
 msgstr ""

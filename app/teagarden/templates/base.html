@@ -22,28 +22,48 @@
 </head>
 <body>
 <div id="help" style="display: none;">
-  <p><div style="text-align: center;"><strong>{% trans "Keyboard Shortcuts" %}</strong></div></p>
-  <table width="100%">
-    <tr valign="top">
-      <td>
-        <table width="100%">
-          <tr>
-            <td></td><th>{% trans "File"%}</th>
-          </tr>
-      </table>
-      </td>
-      <td>
-        <table width="100%">
-          <tr>
-            <td></td><th>{% trans "Table" %}</th>
-            <tr>
-              <td class="shortcut"><span class="letter">m</span> <b>:&nbsp;</b></td><td>{% trans "publish comments" %}</td>
-            </tr>
-          </tr>
-      </table>
-      </td>
-    </tr>
-  </table>
+  <table width="100%" cellpadding="0" style="border-bottom: 1px solid white;">
+	  <tbody>
+		<tr>
+		  <td><div style="font-style:bold; font-family: trebuchet ms, verdana, tahoma, arial, sans-serif; font-size: 1.25em; text-align: left;">{% trans "Keyboard Shortcuts" %}</div></td>
+      <td><div style="text-align: right;">{% trans "ESC to close" %}</div></td>
+		</tr>
+	  </tbody>
+	</table>
+  <table cellpadding="0" width="100%" style="margin-top: 10px;">
+	  <tbody>
+		<tr>
+	  <td>
+		<table cellpadding="0" width="50%">
+		  <tbody>
+			<tr>
+			  <th></th>
+			  <th>{% trans "Navigation" %}</th>
+			</tr>
+			<tr>
+			  <td class="shortcut"><span class="letter">g</span> {% trans 'then' %} <span class="letter">d</span> <b>:</b> </td>
+			  <td>{% trans "Go to dashboard" %}</td>
+			</tr>
+		  </tbody>
+		</table>
+	  </td>
+	  <td>
+		<table cellpadding="0" width="50%">
+		  <tbody>
+			<tr>
+			  <th></th>
+			  <th>{% trans "Timer" %}</th>
+			</tr>
+			<tr>
+			  <td class="shortcut"><span class="letter">m</span> <b>:</b> </td>
+			  <td>{% trans "Publish comment" %}</td>
+			</tr>
+		  </tbody>
+		</table>
+	  </td>
+		</tr>
+	  </tbody>
+	</table>
   </div>
 <div class="page">
   <div class="head">
