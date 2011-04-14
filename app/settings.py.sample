@@ -2,11 +2,11 @@
 
 import os
 
-DEBUG = True
+DEBUG = 'TEAGARDEN_DEBUG' in os.environ.keys()
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Yor name', 'mail@test.com'),
+    ('Your name', 'name@host'),
 )
 
 MANAGERS = ADMINS
@@ -58,16 +58,16 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '/Users/henningkage/Projekte/django-teagarden/hg/app/'
+STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = ''
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = ''
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -85,7 +85,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = ')8(uo(nz^%)j0$5@5v2!2a2d_4cj*fn@xu^up6t$-hcr(#d+2='
+SECRET_KEY = ''
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -138,9 +138,9 @@ INSTALLED_APPS = (
 )
 
 BASE_URL = 'swe/'
-LOGIN_URL = 'signin'
-LOGOUT_URL = 'signout'
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = '/swe/signin'
+LOGOUT_URL = '/swe/signout'
+LOGIN_REDIRECT_URL = '/swe/dashboard'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

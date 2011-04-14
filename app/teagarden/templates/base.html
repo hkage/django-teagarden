@@ -67,7 +67,7 @@
         <li class="first"><a href="{% url teagarden.views.dashboard %}">{% trans "Dashboard" %}</a></li>
         <li class="first"><a href="{% url teagarden.views.projects %}">{% trans "Projects" %}</a></li>
         {% if user.is_superuser %}
-          <li class="first"><a href="/admin" target="_blank">{% trans "Administration" %}</a></li>
+          <li class="first"><a href="{% url admin:index %}">{% trans "Administration" %}</a></li>
         {% endif %}
       {% else %}
         <li class="first"><a href="/">{% trans "Home" %}</a></li>

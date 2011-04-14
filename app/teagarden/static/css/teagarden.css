@@ -235,8 +235,8 @@ td.red {
   margin: 5px 25px 15px 0px;
   /*width: 133px;*/
   margin-top: 20px;
-  font-weight: bold;
-  font-size: 180%;
+  font-weight: normal;
+  font-size: 160%;
 }
 
 .navigation {
