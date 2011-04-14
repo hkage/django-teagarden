@@ -248,7 +248,7 @@ td.red {
 
 
 .liner {
-  padding: 10px 10px;
+  //padding: 10px 10px;
   text-align: right;
 }
 
@@ -257,9 +257,9 @@ td.red {
   display: block;
   float: left;
   /*height: 29px*/
-  margin: 5px 25px 15px 0px;
+  margin: 5px 25px 15px 1px;
   /*width: 133px;*/
-  margin-top: 20px;
+  //margin-top: 20px;
   font-weight: normal;
   font-size: 160%;
 }
