@@ -21,63 +21,7 @@
   <link rel="alternate" type="application/atom+xml" title="{% trans "Recent comments" %}" href="/rss/comments" />
 </head>
 <body>
-<div id="help" style="display: none;">
-  <p><div style="text-align: center;"><strong>{% trans "Keyboard Shortcuts" %}</strong></div></p>
-  <table width="100%">
-    <tr valign="top">
-      <td>
-        <table width="100%">
-          <tr>
-            <td></td><th>{% trans "File"%}</th>
-          </tr>
-      </table>
-      </td>
-      <td>
-        <table width="100%">
-          <tr>
-            <td></td><th>{% trans "Table" %}</th>
-            <tr>
-              <td class="shortcut"><span class="letter">m</span> <b>:&nbsp;</b></td><td>{% trans "publish comments" %}</td>
-            </tr>
-          </tr>
-      </table>
-      </td>
-    </tr>
-  </table>
-  </div>
 <div class="page">
-  <div class="head">
-  <div class="logo">Teagarden</div>
-    <div class="liner">
-      {% if not user.id %}
-        <a href="{% url django.contrib.auth.views.login %}">{% trans "Sign in" %}</a>
-      {% endif %}
-      {% if user.id %}
-        <strong>{{ user.email }} ({{ user.username }})</strong>
-        |
-        <a href="">{% trans "Settings" %}</a>
-        |
-        <a href="{% url django.contrib.auth.views.logout %}">{% trans "Sign out" %}</a>
-      {% endif %}
-    </div>
-
-  <div class="navigation">
-    <ul>
-      {% if user.id %}
-        <li class="first"><a href="{% url teagarden.views.dashboard %}">{% trans "Dashboard" %}</a></li>
-        <li class="first"><a href="{% url teagarden.views.projects %}">{% trans "Projects" %}</a></li>
-        {% if user.is_superuser %}
-          <li class="first"><a href="/admin" target="_blank">{% trans "Administration" %}</a></li>
-        {% endif %}
-      {% else %}
-        <li class="first"><a href="/">{% trans "Home" %}</a></li>
-      {% endif %}
-    </ul>
-  </div>
-  <div class="breadcrumb">
-    {% block breadcrumbs %}{% endblock %}
-  </div>
-</div>
   <h1 style="padding: 5px;">
     {% block page-title %}{% endblock %}
   </h1>
@@ -97,7 +41,7 @@
     </div>
   </div>
 </div>
-<div class="foot">{% include "footer.html" %}</div>
+<div class="foot"></div>
 </div>
 <script>
 var help_displayed = false;

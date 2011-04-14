@@ -23,11 +23,8 @@ from django.views.decorators.http import require_http_methods
 
 from teagarden import decorators, models
 
-DEBUG = "TEAGARDEN_DEBUG" in os.environ
 
 PAGINATION_DEFAULT_LIMIT = 50
-
-counter = 0
 
 
 def _clean_int(value, default, min_value=None, max_value=None):
@@ -57,33 +54,19 @@ def _clean_int(value, default, min_value=None, max_value=None):
 def respond(request, template, params=None):
     """Helper to render a response, passing standard stuff to the response.
 
-    Args:
-      :request: The request object.
-      :template: The template name; '.html' is appended automatically.
-      :params: A dict giving the template parameters; modified in-place.
-
-    Returns:
-      Whatever render_to_response(template, params) returns.
-
-    Raises:
-      Whatever render_to_response(template, params) raises.
+    :param request: The request object.
+    :param template: The template name; '.html' is appended automatically.
+    :param params: A dict giving the template parameters; modified in-place.
+    :returns: Whatever render_to_response(template, params) returns.
+    :raises: Whatever render_to_response(template, params) raises.
     """
-    global counter
-    counter += 1
     if params is None:
         params = {}
     must_choose_nickname = False
     if request.user is not None:
         account = models.Account.current_user_account
         #must_choose_nickname = not account.user_has_selected_nickname()
-    params["request"] = request
-    params["counter"] = counter
-    params["user"] = request.user
-    #params["is_admin"] = request.user.account.is_admin
-    #params['is_dev'] = IS_DEV
-    params["debug"] = DEBUG
-
-    full_path = request.get_full_path().encode("utf-8")
+    #full_path = request.get_full_path().encode("utf-8")
     #if request.user is None:
         #params['sign_in'] = users.create_login_url(full_path)
     #else:
@@ -208,7 +191,7 @@ def discard_comment(request):
     cmt.delete()
     return HttpResponseRedirect(cmt.content_object.get_absolute_url())
     #return HttpResponseRedirect(reverse("teagarden.views.dashboard"))
-    
+
 
 @decorators.comment_owner_required
 def publish_comment(request):
@@ -219,10 +202,10 @@ def publish_comment(request):
     cmt.save()
     return HttpResponseRedirect(cmt.content_object.get_absolute_url())
     #return HttpResponseRedirect(reverse("teagarden.views.dashboard"))
-    
 
-@login_required   
-@decorators.table_required 
+
+@login_required
+@decorators.table_required
 def publish(request):
     """Publish all field comments and write a table comment."""
     form = CommentForm()
@@ -239,7 +222,7 @@ def publish(request):
             cmt.save()
             return HttpResponseRedirect(reverse("teagarden.views.table",
                 args=[request.table.id]))
-    return respond(request, "publish.html", {"table": request.table, 
+    return respond(request, "publish.html", {"table": request.table,
         "form": form})
 
 
@@ -371,15 +354,15 @@ def user_popup(request):
         # Return HttpResponse because the JS part expects a 200 status code.
         return HttpResponse('<font color="red">Error: %s; please report!</font>' %
                             err.__class__.__name__)
-                            
-                            
+
+
 @login_required
 @decorators.table_required
 def star_table(request):
     request.table.add_star(request.user)
     return respond(request, 'table_star.html', {'table': request.table})
-    
-    
+
+
 @login_required
 @decorators.table_required
 def unstar_table(request):

@@ -10,8 +10,6 @@ import models
 
 counter = 0
 
-IS_DEV = 'TEAGARDEN_DEBUG' in os.environ.keys()
-
 
 def library(request):
     """Method to add the applications library to the builtins.
@@ -31,11 +29,11 @@ def library(request):
     params["user"] = request.user
     params["account"] = account
     params["counter"] = counter
-    params["is_dev"] = IS_DEV
+    params["debug"] = settings.DEBUG
     params["BASE_URL"] = settings.BASE_URL
     if request.session.get("project", 0):
         params["selected_project"] = request.session["project"]
-    # Support a list of all projects foer the global admin filter
+    # Support a list of all projects for the global admin filter
     if "/admin/" in request.path:
         query = models.Project.objects.all().order_by("name")
         params["projects"] = query
