@@ -19,7 +19,7 @@ teagarden.show_popup = function(obj, url_part, url_mapper) {
   var index = url.indexOf(url_part);
   var key = url.substring(index + url_part.length + 1);
   var xhr = new goog.net.XhrIo();
-  goog.net.XhrIo.send(base_url + url_mapper + key, function(e) {
+  goog.net.XhrIo.send('/' + base_url + url_mapper + key, function(e) {
     var xhr = e.target;
     var response = xhr.getResponseText();
     var tooltip = new goog.ui.Tooltip(obj);
@@ -38,7 +38,7 @@ teagarden.show_popup = function(obj, url_part, url_mapper) {
   */
 teagarden.set_object_star = function(id, url, name) {
   var xhr = new goog.net.XhrIo();
-  goog.net.XhrIo.send(base_url + id + url, function(e) {
+  goog.net.XhrIo.send('/' + base_url + id + url, function(e) {
     var xhr = e.target;
     var response = xhr.getResponseText();
     var el = goog.dom.getElement(name + '-star-' + id);

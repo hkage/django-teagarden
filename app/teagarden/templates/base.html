@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <title>
-    {% block title %}TITLE GOES HERE{% endblock %} - Teagarden
+    {% block title %}{% endblock %} - Teagarden
   </title>
   <link rel="icon" type="image/png" href="{{ STATIC_URL}}img/favicon.png" />
   <link rel="stylesheet" type="text/css" media="all" href="{{ STATIC_URL}}css/teagarden.css" />
@@ -14,11 +14,10 @@
 	  <script type="text/javascript" src="{{ STATIC_URL }}closure/goog/base.js"></script>
 	  <script src="{{ STATIC_URL }}js/script.js?v=1"></script>
     <!-- Need this hack to use the debug toolbar -->
-    <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}admin/js/jquery.min.js"></script>
   {% else %}
 	  <script type="text/javascript" src="{{ STATIC_URL }}js/script.js.compiled?v=1"></script>
   {% endif %}
-  
   <link rel="alternate" type="application/atom+xml" title="{% trans "Recent comments" %}" href="/rss/comments" />
 </head>
 <body>
@@ -79,11 +78,9 @@
     {% block breadcrumbs %}{% endblock %}
   </div>
 </div>
-
   <h1 style="padding: 5px;">
     {% block page-title %}{% endblock %}
   </h1>
-
 <div class="body">
   <div class="main">
     <div class="main-inner">

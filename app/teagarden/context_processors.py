@@ -35,6 +35,7 @@ def library(request):
     params["BASE_URL"] = settings.BASE_URL
     if request.session.get("project", 0):
         params["selected_project"] = request.session["project"]
+    # Support a list of all projects foer the global admin filter
     if "/admin/" in request.path:
         query = models.Project.objects.all().order_by("name")
         params["projects"] = query
