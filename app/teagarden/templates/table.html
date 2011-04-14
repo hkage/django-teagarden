@@ -50,7 +50,7 @@
           </div>
         </td>
 
-        <td style="padding-left: .8em; padding-right: .8em; width:80%;">
+        <td style="padding-left: .8em; padding-right: .8em; width:80%; vertical-align: top;">
         {% if draft_count %}
         <div class="error">
           {% trans "You have <strong>unpublished comments</strong>. Other users won't see them unless you publish them." %}
@@ -175,7 +175,7 @@
             <pre class="cl-comment-{{ forloop.counter0 }}" name="cl-comment-{{ forloop.counter0 }}">{{ comment.text|wordwrap:80|urlize }}</pre>
           </div>
           <div class="comment-actions">
-            
+
             {% if user %}
               {% if not comment.is_draft %}
               <div id="comment-actions-{{ comment.id }}">

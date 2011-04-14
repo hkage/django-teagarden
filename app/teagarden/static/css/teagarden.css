@@ -124,6 +124,31 @@ input, textarea, select {
   /*font-family:"Myriad Pro","Segoe UI",Helvetica, Arial, sans-serif;*/
 }
 
+/*
+
+button, input[type="button"], input[type="submit"], input[type="reset"] {
+margin: 2px;
+padding: 3px 6px;
+background: #F1F1F1;
+background: -webkit-gradient(linear, left top, left bottom, from(white), to(#F1F1F1));
+background: -moz-linear-gradient(top, white, #F1F1F1);
+border: 1px solid #CCC;
+cursor: pointer;
+}
+
+button:hover, input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover,
+button:focus, input[type=button]:focus, input[type=submit]:focus, input[type=reset]:focus {
+	background: #ccc;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc));
+	background: -moz-linear-gradient(top, #fff, #ccc);
+}
+
+button:active, input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
+	background: #ababab;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#ababab));
+	background: -moz-linear-gradient(top, #f1f1f1, #ababab);
+}
+*/
 
 /*
 input.submit {
@@ -259,13 +284,13 @@ td.red {
 .navigation ul li {
   float:left;
   background-color: #E9F2DF;
-  -moz-border-radius-topleft: 5px;
-  -moz-border-radius-topright: 5px;
-  -webkit-border-top-left-radius: 5px;
-  -webkit-border-top-right-radius: 5px;
+  //-moz-border-radius-topleft: 5px;
+  //-moz-border-radius-topright: 5px;
+  //-webkit-border-top-left-radius: 5px;
+  //-webkit-border-top-right-radius: 5px;
   margin:0;
   padding:0;
-  margin-right: 8px;
+  margin-right: 5px;
   /*border-right: 2px solid #ffffff;*/
 }
 
@@ -285,10 +310,10 @@ td.red {
   /*background-image: url(../img/nav_hover.png);*/
   /*background: url(../img/grey-stripe-hover.gif);*/
   background-color: #c8e3ac;
-  -moz-border-radius-topleft: 5px;
-  -moz-border-radius-topright: 5px;
-  -webkit-border-top-left-radius: 5px;
-  -webkit-border-top-right-radius: 5px;
+  //-moz-border-radius-topleft: 5px;
+  //-moz-border-radius-topright: 5px;
+  //-webkit-border-top-left-radius: 5px;
+  //-webkit-border-top-right-radius: 5px;
   text-decoration: none;
 }
 
@@ -476,8 +501,10 @@ padding-top:0.5em;
 
 .default-list {
   /*background-color: #ECECEC;*/
-  background-color: #eff6ff;
-  border: thin solid #d2e6ff;
+  /*background-color: #eff6ff;*/
+  background-color: #e9f4dd;
+  //border: thin solid #d2e6ff;
+  border: thin solid #bed4a6;
   margin-bottom: 10px;
   padding: 5px;
 }
