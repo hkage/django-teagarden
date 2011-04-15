@@ -1,0 +1,27 @@
+{% load i18n %}
+<li>
+  <div>
+	<a id="comment-{{ comment.id }}-pointer" href="javascript:teagarden.timeline.expand('comment-{{ comment.id }}');" class="toggled-section ">
+	<span id="comment-{{ comment.id }}-image" class="sprite plus"></span>
+	</a>
+	<span class="date">
+	  {% ifequal comment.created|date today|date %}
+		{{ comment.created|timesince }}
+	  {% else %}
+		{{ comment.created|date }}
+	  {% endifequal %}
+	</span>
+	<span>
+	<span style="margin-left: 5px;">
+	  <a href="{{ comment.content_object.get_absolute_url }}">{{ comment.content_object }}</a>
+    {% trans "by" %} {{ comment.created_by_id|show_user_link }}
+	</span>
+	<span id="comment-{{ comment.id}}-short-description" style="color: #777;">&nbsp;-&nbsp;&nbsp;{{ comment.text|truncatewords:20 }}
+	</span>
+	<div id="comment-{{ comment.id }}" class="details" style="display:none;">
+	  <span class="details">
+		{{ comment.text }}
+	  </span>
+	</div>
+  </div>
+</li>
