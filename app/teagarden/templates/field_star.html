@@ -1,11 +1,13 @@
 <span id="field-star-{{ field.id }}">
   {% if field|is_starred:user %}
     <a href="javascript:teagarden.remove_field_star({{ field.id }})">
-      <img class="star" src="{{ STATIC_URL }}img/cleardot.gif"></a>
+    <span id="field-information-image" class="sprite star"></span>
+    </a>
   {% else %}
     {% if request.user %}
       <a href="javascript:teagarden.add_field_star({{ field.id }})">
-	<img class="unstar" src="{{ STATIC_URL }}img/cleardot.gif"></a>
+      <span id="field-information-image" class="sprite star_grey"></span>
+      </a>
     {% endif %}
   {% endif %}
 </span>

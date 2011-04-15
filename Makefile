@@ -25,3 +25,7 @@ prod:
 
 mo:
 	@cd app/teagarden; $(PYTHON) ../manage.py compilemessages
+
+sprites:
+	@rm -f data/sprites/sprites.zip
+	@zip -j -v data/sprites/sprites.zip data/sprites/*.png

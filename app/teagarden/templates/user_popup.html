@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<strong>{{ user|nickname }}</strong> ({{ user.email }})
+<strong>{{ user|nickname }}</strong> {% if user.email %}({{ user.email }}){% endif %}
 <p>
   {% trans "Member since" %}: {{ user.date_joined|date }}<br/>
 </p>

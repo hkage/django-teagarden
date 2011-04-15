@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 import logging
 import os
 
@@ -109,9 +110,20 @@ class CommentForm(forms.Form):
 
 @login_required
 def dashboard(request):
-    #comments = models.TableComment.objects.filter(is_draft=False)
-    #comments = comments.order_by("-created")[:5]
-    return respond(request, "inbox.html", {})
+    today = datetime.date.today()
+    query = models.Comment.objects.select_related().order_by('-created')
+    comments_today = query.filter(created__gte=today)
+    comments_last_week = query.filter(
+        created__lt=today,
+        created__gte=today - datetime.timedelta(days=7))
+    comments_last_month = query.filter(
+        created__lt=today - datetime.timedelta(days=7),
+        created__gte=today - datetime.timedelta(days=30))
+    return respond(request, 'latest_comments.html', {
+        'comments_today': comments_today,
+        'comments_last_week': comments_last_week,
+        'comments_last_month': comments_last_month})
+
 
 @login_required
 def index(request):

@@ -1,11 +1,13 @@
 <span id="table-star-{{ table.id }}">
   {% if table|is_starred:user %}
     <a href="javascript:teagarden.remove_table_star({{ table.id }})">
-      <img class="star" src="{{ STATIC_URL }}img/cleardot.gif"></a>
+      <span id="table-information-image" class="sprite star"></span>
+      </a>
   {% else %}
     {% if request.user %}
       <a href="javascript:teagarden.add_table_star({{ table.id }})">
-	<img class="unstar" src="{{ STATIC_URL }}img/cleardot.gif"></a>
+        <span id="table-information-image" class="sprite star_grey"></span>
+	     </a>
     {% endif %}
   {% endif %}
 </span>

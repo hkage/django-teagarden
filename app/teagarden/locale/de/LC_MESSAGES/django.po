@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-15 10:10+0200\n"
-"PO-Revision-Date: 2011-04-15 10:11+0100\n"
+"POT-Creation-Date: 2011-04-15 12:21+0200\n"
+"PO-Revision-Date: 2011-04-15 12:22+0100\n"
 "Last-Translator: Henning Kage <henning.kage@googlemail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -61,6 +61,7 @@ msgstr "Feld"
 #: admin.py:384
 #: models.py:470
 #: templates/reference_heading.html:5
+#: templates/starred_objects.html:26
 #: templates/table.html:72
 #: templates/table_heading.html:9
 msgid "Fields"
@@ -83,6 +84,7 @@ msgstr "Tabelle"
 #: models.py:335
 #: templates/project.html:37
 #: templates/project_heading.html:6
+#: templates/starred_objects.html:7
 msgid "Tables"
 msgstr "Tabellen"
 
@@ -412,7 +414,7 @@ msgstr "Feldtypen"
 
 #: models.py:572
 #: models.py:604
-#: views.py:124
+#: views.py:136
 msgid "Group"
 msgstr "Gruppe"
 
@@ -481,33 +483,33 @@ msgstr "Markiertes Objekt"
 msgid "Starred items"
 msgstr "Markierte Objekte"
 
-#: views.py:106
+#: views.py:107
 msgid "Message"
 msgstr "Nachricht"
 
-#: views.py:130
+#: views.py:142
 msgid "Show all"
 msgstr "Alle anzeigen"
 
-#: views.py:142
+#: views.py:154
 msgid "First name"
 msgstr "Vorname"
 
-#: views.py:144
+#: views.py:156
 msgid "Last name"
 msgstr "Nachname"
 
-#: views.py:146
+#: views.py:158
 msgid "E-mail"
 msgstr "E-Mail"
 
-#: views.py:177
+#: views.py:189
 msgid "Failure"
 msgstr ""
 
 #: templates/base.html:21
 #: templates/base_minimal.html:21
-#: templates/footer.html:9
+#: templates/footer.html:8
 msgid "Recent comments"
 msgstr "Aktuelleste Kommentare"
 
@@ -580,10 +582,18 @@ msgstr "Administration"
 msgid "Home"
 msgstr ""
 
+#: templates/comment_row.html:17
+#: templates/publish.html:34
+#: templates/publish.html.py:38
+#: templates/table.html:42
+#: templates/table.html.py:46
+msgid "by"
+msgstr "von"
+
 #: templates/dashboard_sidebar.html:4
-#: templates/inbox.html:5
-msgid "Inbox"
-msgstr ""
+#: templates/latest_comments.html:5
+msgid "Latest comments"
+msgstr "Aktuellste Kommentare"
 
 #: templates/dashboard_sidebar.html:5
 #: templates/starred_objects.html:5
@@ -636,6 +646,36 @@ msgstr "Kommentar veröffentlichen"
 msgid "more shortcuts"
 msgstr "weitere Kürzel"
 
+#: templates/latest_comments.html:9
+msgid "Expand all"
+msgstr "Alle aufklappen"
+
+#: templates/latest_comments.html:11
+msgid "Collapse all"
+msgstr "Alle zuklappen"
+
+#: templates/latest_comments.html:23
+#: templates/project.html:64
+#: templates/projects.html:26
+#: templates/starred_objects.html:20
+#: templates/starred_objects.html.py:39
+#: templates/table.html:85
+#: templates/table.html.py:106
+msgid "No entries found"
+msgstr "Keine Einträge gefunden"
+
+#: templates/latest_comments.html:27
+msgid "Today"
+msgstr ""
+
+#: templates/latest_comments.html:35
+msgid "Last 7 days"
+msgstr "Letzten 7 Tage"
+
+#: templates/latest_comments.html:43
+msgid "Last 30 days"
+msgstr ""
+
 #: templates/project.html:9
 msgid "Language"
 msgstr "Sprache"
@@ -656,26 +696,10 @@ msgstr "Auswählen"
 msgid "Show"
 msgstr "Anzeigen"
 
-#: templates/project.html:64
-#: templates/projects.html:26
-#: templates/starred_objects.html:20
-#: templates/starred_objects.html.py:39
-#: templates/table.html:85
-#: templates/table.html.py:106
-msgid "No entries found"
-msgstr "Keine Einträge gefunden"
-
 #: templates/publish.html:33
 #: templates/table.html:41
 msgid "Created"
 msgstr "Erstellt"
-
-#: templates/publish.html:34
-#: templates/publish.html.py:38
-#: templates/table.html:42
-#: templates/table.html.py:46
-msgid "by"
-msgstr ""
 
 #: templates/publish.html:37
 #: templates/table.html:45
@@ -695,14 +719,6 @@ msgstr "Veröffentlichen"
 #: templates/publish.html:57
 msgid "Cancel"
 msgstr "Abbrechen"
-
-#: templates/starred_objects.html:7
-msgid "Starred tables"
-msgstr "Markierte Tabellen"
-
-#: templates/starred_objects.html:26
-msgid "Starred fields"
-msgstr "Markierte Felder"
 
 #: templates/table.html:56
 msgid "You have <strong>unpublished comments</strong>. Other users won't see them unless you publish them."
@@ -962,14 +978,17 @@ msgstr ""
 msgid "Forgot password?"
 msgstr ""
 
+#~ msgid "Starred tables"
+#~ msgstr "Markierte Tabellen"
+
+#~ msgid "Starred fields"
+#~ msgstr "Markierte Felder"
+
 #~ msgid "File"
 #~ msgstr "Datei"
 
 #~ msgid "Updated by"
 #~ msgstr "Aktualisiert von"
-
-#~ msgid "Table comments"
-#~ msgstr "Tabellen Kommentare"
 
 #~ msgid "Field comment"
 #~ msgstr "Feld Kommentar"

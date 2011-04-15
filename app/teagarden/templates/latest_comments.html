@@ -1,0 +1,56 @@
+{% extends "dashboard.html" %}
+{% load i18n %}
+
+{% block dashboard-content %}
+  <h2>{% trans "Latest comments" %}</h2>
+  <div id="comment" class="default-list">
+  <div class="pagination">
+    <div style="float: left; margin-bottom: 5px;">
+      <a href="javascript:teagarden.timeline.expand_all('timeline');">{% trans "Expand all" %}</a>
+      |
+      <a href="javascript:teagarden.timeline.collapse_all('timeline');">{% trans "Collapse all" %}</a>
+    </div>
+  </div>
+  <table id="timeline" width="100%">
+    <thead>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="first last" style="padding:0px" width="100%">
+          <div class="timeline-list">
+            {% if not comments_today and not comments_last_week and not comments_last_month %}
+              <ul class="timeline">
+                <li>{% trans "No entries found" %}</li>
+              </ul>
+            {% endif %}
+            {% if comments_today %}
+              <h4>{% trans "Today" %}</h4>
+              <ul class="timeline">
+                {% for comment in comments_today %}
+                  {% include "comment_row.html" %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if comments_last_week %}
+              <h4>{% trans "Last 7 days" %}</h4>
+              <ul class="timeline">
+                {% for comment in comments_last_week %}
+                  {% include "comment_row.html" %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if comments_last_month %}
+              <h4>{% trans "Last 30 days" %}</h4>
+              <ul class="timeline">
+                {% for comment in comments_last_month %}
+                  {% include "comment_row.html" %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+{% endblock %}

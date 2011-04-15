@@ -1,6 +1,7 @@
 goog.provide('teagarden');
 goog.provide('teagarden.comments');
 goog.provide('teagarden.shortcuts');
+goog.provide('teagarden.timeline');
 
 goog.require('goog.dom');
 goog.require('goog.events');
@@ -234,3 +235,68 @@ teagarden.comments.reply = function(message_id, creation_date, username) {
   //goog.dom.getElement('message-reply-href-' + message_id).style.display = 'none';
   //goog.dom.getElement('comment-actions-' + message_id).style.display = 'none';
 }
+
+/**
+ * Expand a single timeline entry.
+ * @param {String} id The element id
+ */
+teagarden.timeline.expand = function(id) {
+  var desc = goog.dom.getElement(id + "-short-description");
+  teagarden.toggle_section(id);
+    if (desc.style.display == "none") {
+      desc.style.display = "";
+    }
+    else {
+      desc.style.display = "none";
+    }
+}
+
+/**
+  * Expand all timeline entries within a table
+  * @param {String} id The table id
+  */
+teagarden.timeline.expand_all = function(id) {
+  var table = goog.dom.getElement(id);
+  var divs = table.getElementsByTagName('div');
+  for (i = 0; i < divs.length; i++) {
+    var e = divs[i];
+    if (e.className == 'details') {
+      e.style.display = '';
+    }
+  }
+  var spans = table.getElementsByTagName('span');
+  for (i = 0; i < spans.length; i++) {
+    var e = spans[i];
+    if (e.className == 'sprite plus') {
+      e.className = 'sprite minus';
+    }
+    else if (e.id.match(/^.*short-description$/)) {
+      e.style.display = 'none';
+    }
+  }
+};
+
+/**
+  * Collapse all timeline entries within a table
+  * @param {String} id The table id
+  */
+teagarden.timeline.collapse_all = function(id) {
+  var table = goog.dom.getElement(id);
+  var divs = table.getElementsByTagName('div');
+  for (i = 0; i < divs.length; i++) {
+    var e = divs[i];
+    if (e.className == 'details') {
+      e.style.display = 'none';
+    }
+  }
+  var spans = table.getElementsByTagName('span');
+  for (i = 0; i < spans.length; i++) {
+    var e = spans[i];
+    if (e.className == 'sprite minus') {
+      e.className = 'sprite plus';
+    }
+    else if (e.id.match(/^.*short-description$/)) {
+      e.style.display = '';
+    }
+  }
+};

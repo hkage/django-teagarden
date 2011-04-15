@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 import os
 
 from django.conf import settings
@@ -31,6 +32,7 @@ def library(request):
     params["counter"] = counter
     params["debug"] = settings.DEBUG
     params["BASE_URL"] = settings.BASE_URL
+    params["today"] = datetime.date.today()
     if request.session.get("project", 0):
         params["selected_project"] = request.session["project"]
     # Support a list of all projects for the global admin filter
