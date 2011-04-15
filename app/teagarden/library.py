@@ -42,12 +42,8 @@ def bool_to_image(val):
     span = '<span id="" class="sprite %s"></span>'
     if not val:
         span = span % "cross"
-        #return mark_safe('<img src="%(STATIC_URL)simg/cross.png">'
-                         #% {"STATIC_URL": settings.STATIC_URL})
     else:
         span = span % "tick"
-        #return mark_safe('<img src="%(STATIC_URL)simg/tick.png">'
-                         #% {"STATIC_URL": settings.STATIC_URL})
     return mark_safe(span)
 
 
