@@ -8,6 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.core.cache import cache
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import ugettext as _
 
 # Monkey-patch DEFAULT_NAMES for Meta options. Otherwise
@@ -159,6 +160,16 @@ class CommentProvider(object):
 
     def count_drafts(self):
         query = self.get_comments().filter(is_draft=True)
+        return query.count()
+
+    def count_new_comments(self, user):
+        """Count all comments from other users since the last login.
+
+        :param user: A :class:`User` instance
+        :returns: A number of comments
+        """
+        query = self.get_comments().filter(created__gte=user.last_login)
+        query = query.filter(~Q(created_by=user))
         return query.count()
 
     def get_comments(self):

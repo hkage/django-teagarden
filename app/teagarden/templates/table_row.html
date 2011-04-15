@@ -20,10 +20,8 @@
     {% if table.count_comments %}
       {{ table.count_comments }}
     {% endif %}
-    {% if table.count_drafts %}
-      <span style="color: red; font-weight:bold;">
-        + {{ table.count_drafts }} {% trans "Drafts" %}
-      </span>
+    {% if table|count_new_comments:user %}
+      <span style="color: red; font-weight:bold;">({{ table|count_new_comments:user }} {% trans "new" %})</span>
     {% endif %}
   </td>
   <td class="last">{{ table.updated|timesince }}, {{ table.updated_by_id|show_user_link }}</td>
