@@ -34,6 +34,7 @@ Current features
  * Backend for creating and managing projects, tables, fields etc.
  * Frontend to view projects, tables and fields
  * Composing table comments
+ * RSS comment feed
 
 Planned features
 ================
