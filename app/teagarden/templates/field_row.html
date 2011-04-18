@@ -5,13 +5,13 @@
   </td>
   <td class="{% if field.primary %}red{% endif %}" width="20">{% include "field_star.html" %}</td>
   <td class="{% if field.primary %}red{% endif %}" style="text-align: right;">
-    {{ field.id }}
-  </td>
-  <td class="{% if field.primary %}red{% endif %}" style="text-align: right;">
-    {{ field.position }}
+    <a href="{% url teagarden.views.field field.id %}">{{ field.id }}</a>
   </td>
   <td class="{% if field.primary %}red{% endif %}">
     <a href="{% url teagarden.views.field field.id %}">{{ field.full_name }}</a>
+  </td>
+  <td class="{% if field.primary %}red{% endif %}" style="text-align: right;">
+    {{ field.position }}
   </td>
   <td class="{% if field.primary %}red{% endif %}">{{ field.full_type }}</td>
   <td style="text-align: center;" class="{% if field.primary %}red{% endif %}">
