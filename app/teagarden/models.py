@@ -472,6 +472,10 @@ class Field(TimestampModel, CommentProvider, StarredItemProvider):
     def __unicode__(self):
         return self.name
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('teagarden.views.field', [str(self.id)])
+
     def full_name(self):
         """Return a qualified name by table and prefix, if given.
 

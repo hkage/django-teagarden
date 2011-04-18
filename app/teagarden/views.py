@@ -218,7 +218,7 @@ def publish_comment(request):
 
 @login_required
 @decorators.table_required
-def publish(request):
+def publish_table_comment(request):
     """Publish all field comments and write a table comment."""
     form = CommentForm()
     if request.method == "POST":
@@ -227,15 +227,33 @@ def publish(request):
                 args=[request.table.id]))
         form = CommentForm(request.POST)
         if form.is_valid():
-            cmt = models.Comment(content_object=request.table)
-            cmt.is_draft = False
-            cmt.text = form.cleaned_data["message"]
-            cmt.set_timestamps(request.user)
+            cmt = _make_comment(request, request.table,
+                                form.cleaned_data['message'], False)
             cmt.save()
             return HttpResponseRedirect(reverse("teagarden.views.table",
                 args=[request.table.id]))
     return respond(request, "publish.html", {"table": request.table,
         "form": form})
+
+
+@login_required
+@decorators.field_required
+def publish_field_comment(request):
+    """Create a new field comment."""
+    form = CommentForm()
+    if request.method == "POST":
+        if "cancel" in request.POST:
+            return HttpResponseRedirect(reverse("teagarden.views.field",
+                args=[request.field.id]))
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            cmt = _make_comment(request, request.field,
+                                form.cleaned_data['message'], False)
+            cmt.save()
+            return HttpResponseRedirect(reverse("teagarden.views.field",
+                args=[request.field.id]))
+    return respond(request, 'publish.html', {'field': request.field,
+        'form': form})
 
 
 @require_http_methods(['POST'])
@@ -248,7 +266,6 @@ def create_comment(request):
             pass
         cmt = _make_comment(request, request.table,
                             form.cleaned_data["message"], False)
-        cmt.set_timestamps(request.user)
         cmt.save()
         return HttpResponseRedirect(reverse("teagarden.views.table",
             args=[request.table.id]))
@@ -296,7 +313,16 @@ def projects(request):
 
 
 def _show_user(request):
-    return respond(request, "user.html", {})
+    num_tables = models.Table.objects.filter(
+        created_by=request.user_to_show).count()
+    num_fields = models.Field.objects.filter(
+        created_by=request.user_to_show).count()
+    num_comments = models.Comment.objects.filter(
+        created_by=request.user_to_show).count()
+    return respond(request, "user.html", {'user_to_show': request.user_to_show,
+                                          'num_tables': num_tables,
+                                          'num_fields': num_fields,
+                                          'num_comments': num_comments})
 
 
 @login_required
@@ -394,3 +420,11 @@ def star_field(request):
 def unstar_field(request):
     request.field.remove_star(request.user)
     return respond(request, 'field_star.html', {'field': request.field})
+
+
+@login_required
+@decorators.field_required
+def field(request):
+    """Displays the details and comments of a field."""
+    return respond(request, 'field.html', {'field': request.field})
+

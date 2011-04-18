@@ -11,7 +11,7 @@
     {{ field.position }}
   </td>
   <td class="{% if field.primary %}red{% endif %}">
-    {{ field.full_name }}
+    <a href="{% url teagarden.views.field field.id %}">{{ field.full_name }}</a>
   </td>
   <td class="{% if field.primary %}red{% endif %}">{{ field.full_type }}</td>
   <td style="text-align: center;" class="{% if field.primary %}red{% endif %}">
@@ -30,49 +30,7 @@
     {% endif %}
   </td>
   <td class="{% if field.primary %}red{% endif %}" style="text-align: center;">
-    <a id="field-comments-{{ field.id }}-pointer" href="javascript:teagarden.toggle_section('field-comments-{{ field.id }}');" class="toggled-section opentriangle">
-      {{ field.count_comments }}
-    </a>
+    {{ field.count_comments }}
   </td>
   <td class="{% if field.primary %}red{% endif %} last">{{ field.updated|timesince }}, {{ field.updated_by_id|show_user_link }}</td>
 </tr>
-<tr id="field-comments-{{ field.id }}" style="display:none;">
-  <td colspan="4" style="background-color: #EFF6FF;">
-  </td>
-  <td class="first last" colspan="6" style="border-left: 2px solid #BAD9FF;">
-      {% for comment in field.get_comments_by_date %}
-        <div>
-        <table border="0" width="100%" cellspacing="0" cellpadding="0">
-          <tr style="border-bottom: none;">
-            <td style="padding-left: 5px; white-space: nowrap;">
-              {% if comment.is_draft %}
-                <b>({% trans "Draft" %})</b>
-              {% else %}
-                <b>{{ comment.created_by|nickname }}</b>
-              {% endif %}
-            </td>
-            <td style="white-space: nowrap; padding-right: 5px; text-align:right;">
-              <small>{{ comment.created|timesince }} {% trans "ago" %}</small>
-            </td>
-          </tr>
-          <tr style="border: none;">
-          <td>
-              <pre>{{ comment.text|wordwrap:80|urlize }}</pre>
-            </td>
-          </tr>
-        </table>
-        </div>
-      {% endfor %}
-  </td>
-</tr>
-
-{% if user %}
-  <div style="display:none;">
-    <div>
-      <textarea rows="7" cols="70" name="message"></textarea>
-    </div>
-    <a id="resizer" class="resizer" style="display:none;cursor:pointer">
-      <img class="zippy-plus" src="/static/img/cleardot.gif">
-    </a>
-  </div>
-{% endif %}

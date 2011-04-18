@@ -107,9 +107,9 @@
       {% if messages %}
         <div class="message-box">
           <ul class="messages">
-              {% for message in messages %}
-                  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-              {% endfor %}
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
           </ul>
         </div>
       {% endif %}
@@ -124,7 +124,10 @@ var help_displayed = false;
 teagarden.shortcuts.init_handler();
 var dashboard_link = "{% url teagarden.views.dashboard %}";
 {% if table %}
-  var publish_link = "{% url teagarden.views.publish table.id %}";
+var publish_link = "{% url teagarden.views.publish_table_comment table.id %}";
+{% endif %}
+{% if field %}
+var publish_link = "{% url teagarden.views.publish_field_comment field.id %}";
 {% endif %}
 var base_url = "{{ BASE_URL }}";
 </script>

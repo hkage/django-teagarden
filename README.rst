@@ -41,6 +41,7 @@ Planned features
  * Preview and create source files for tables in many dialects (e.g. PostgreSQL,
    Oracle, Python)
  * Visualization of tables and their references
+ * Metadata / database comparison to create alter table statements
 
 __ http://de.wikipedia.org/wiki/Jack_Teagarden
 __ http://www.gnu.org/licenses/gpl.html
