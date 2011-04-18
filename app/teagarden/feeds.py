@@ -37,4 +37,4 @@ class CommentFeed(Feed):
         return obj.created_by.email
 
     def title(self):
-        return _(u'Teagaden comments feed')
+        return _(u'Teagarden comments feed')

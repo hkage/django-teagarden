@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-15 12:21+0200\n"
-"PO-Revision-Date: 2011-04-15 12:22+0100\n"
+"POT-Creation-Date: 2011-04-18 12:21+0200\n"
+"PO-Revision-Date: 2011-04-18 12:23+0100\n"
 "Last-Translator: Henning Kage <henning.kage@googlemail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,32 +27,34 @@ msgid "The prefix '%(prefix)s' is already in use for project '%(project)s'."
 msgstr "Der Tabellenpräfix '%(prefix)s' wird bereits im Projekt '%(project)s' verwendet."
 
 #: admin.py:90
-#: models.py:630
-#: models.py:644
+#: models.py:634
+#: models.py:648
 msgid "Key"
 msgstr "Schlüssel"
 
 #: admin.py:91
-#: models.py:631
+#: models.py:635
 msgid "Keys"
 msgstr "Schlüssel"
 
 #: admin.py:98
-#: models.py:513
-#: models.py:590
+#: models.py:517
+#: models.py:594
 msgid "Property"
 msgstr "Eigenschaft"
 
 #: admin.py:99
-#: models.py:591
+#: models.py:595
 msgid "Properties"
 msgstr "Eigenschaften"
 
 #: admin.py:107
 #: models.py:33
 #: models.py:469
-#: models.py:516
-#: models.py:642
+#: models.py:520
+#: models.py:646
+#: templates/field.html:5
+#: templates/field.html.py:12
 msgid "Field"
 msgstr "Feld"
 
@@ -71,9 +73,9 @@ msgstr "Felder"
 #: models.py:34
 #: models.py:334
 #: models.py:462
-#: models.py:602
-#: models.py:622
-#: templates/publish.html:8
+#: models.py:606
+#: models.py:626
+#: templates/field.html:27
 #: templates/starred_field_heading.html:6
 #: templates/table.html:5
 #: templates/table.html.py:15
@@ -105,7 +107,8 @@ msgstr "Zeitstempel"
 #: models.py:279
 #: models.py:311
 #: models.py:426
-#: models.py:671
+#: models.py:675
+#: templates/field.html:53
 #: templates/project.html:24
 #: templates/starred_field_heading.html:8
 #: templates/starred_table_heading.html:7
@@ -172,11 +175,11 @@ msgstr ""
 #: admin.py:565
 #: models.py:285
 #: models.py:313
-#: models.py:565
-#: models.py:661
+#: models.py:569
+#: models.py:665
+#: templates/field.html:21
 #: templates/project.html:5
 #: templates/project.html.py:18
-#: templates/publish.html:17
 #: templates/starred_field_heading.html:5
 #: templates/starred_table_heading.html:5
 #: templates/table.html:25
@@ -189,6 +192,19 @@ msgstr "Projekt"
 #, python-format
 msgid "Filter for project '%s' applied."
 msgstr "Filter nach Projekt '%s' eingeschränkt."
+
+#: feeds.py:11
+msgid "Current comments feed"
+msgstr "Kommentar Feed"
+
+#: feeds.py:28
+#, python-format
+msgid "Comment on '%s'"
+msgstr "Kommentar zu '%s'"
+
+#: feeds.py:40
+msgid "Teagaden comments feed"
+msgstr "Teagardem Kommentar Feed"
 
 #: filter.py:84
 #: templates/project.html:44
@@ -209,7 +225,7 @@ msgid "True"
 msgstr "Ja"
 
 #: models.py:28
-#: models.py:691
+#: models.py:695
 msgid "Lookup"
 msgstr "Lookup"
 
@@ -229,14 +245,14 @@ msgstr ""
 #: models.py:298
 #: models.py:391
 #: models.py:416
-#: models.py:508
-#: models.py:531
-#: models.py:561
-#: models.py:582
-#: models.py:600
-#: models.py:617
-#: models.py:640
-#: models.py:659
+#: models.py:512
+#: models.py:535
+#: models.py:565
+#: models.py:586
+#: models.py:604
+#: models.py:621
+#: models.py:644
+#: models.py:663
 #: templates/field_heading.html:4
 #: templates/project_heading.html:3
 #: templates/reference_heading.html:3
@@ -250,11 +266,11 @@ msgstr ""
 #: models.py:300
 #: models.py:394
 #: models.py:418
-#: models.py:534
-#: models.py:563
-#: models.py:584
-#: models.py:624
-#: models.py:663
+#: models.py:538
+#: models.py:567
+#: models.py:588
+#: models.py:628
+#: models.py:667
 #: templates/field_heading.html:6
 #: templates/project_heading.html:4
 #: templates/reference_heading.html:4
@@ -267,10 +283,10 @@ msgstr "Name"
 #: models.py:276
 #: models.py:308
 #: models.py:423
-#: models.py:668
+#: models.py:672
+#: templates/field.html:33
 #: templates/field_heading.html:10
 #: templates/project_heading.html:5
-#: templates/publish.html:25
 #: templates/table.html:33
 #: templates/table_heading.html:8
 msgid "Short description"
@@ -290,9 +306,8 @@ msgstr "Präfix"
 
 #: models.py:304
 #: models.py:430
-#: models.py:675
+#: models.py:679
 #: templates/field_heading.html:7
-#: templates/publish.html:21
 #: templates/table.html:29
 #: templates/table_heading.html:6
 msgid "Type"
@@ -320,7 +335,7 @@ msgid "Copy of '%s'"
 msgstr "Kopie von '%s'"
 
 #: models.py:397
-#: models.py:537
+#: models.py:541
 msgid "Short name"
 msgstr "Kurzbezeichnung"
 
@@ -333,37 +348,37 @@ msgid "Tabletypes"
 msgstr "Tabellentypen"
 
 #: models.py:420
-#: models.py:510
-#: models.py:646
-#: models.py:665
+#: models.py:514
+#: models.py:650
+#: models.py:669
 #: templates/field_heading.html:5
 msgid "Position"
 msgstr "Position"
 
 #: models.py:428
-#: models.py:673
+#: models.py:677
 msgid "Label"
 msgstr "Label"
 
 #: models.py:433
-#: models.py:541
-#: models.py:678
+#: models.py:545
+#: models.py:682
 msgid "Precision"
 msgstr ""
 
 #: models.py:436
-#: models.py:545
-#: models.py:681
+#: models.py:549
+#: models.py:685
 msgid "Scaling"
 msgstr ""
 
 #: models.py:439
-#: models.py:684
+#: models.py:688
 msgid "Primary"
 msgstr "Primär"
 
 #: models.py:443
-#: models.py:688
+#: models.py:692
 msgid "Foreign key"
 msgstr "Fremdschlüssel"
 
@@ -372,114 +387,114 @@ msgid "Lookup?"
 msgstr "Lookup?"
 
 #: models.py:449
-#: models.py:694
+#: models.py:698
 #: templates/field_heading.html:8
 msgid "Nullable"
 msgstr "Null"
 
 #: models.py:452
-#: models.py:697
+#: models.py:701
 msgid "Mask length"
 msgstr "Maskenlänge"
 
 #: models.py:455
-#: models.py:700
+#: models.py:704
 msgid "Default value"
 msgstr "Standardwert"
 
 #: models.py:459
-#: models.py:704
+#: models.py:708
 msgid "Cascading delete"
 msgstr "Kaskadiertes Löschen"
 
-#: models.py:518
+#: models.py:522
 msgid "Value"
 msgstr "Wert"
 
-#: models.py:524
+#: models.py:528
 msgid "Field property"
 msgstr "Feldeigenschaft"
 
-#: models.py:525
+#: models.py:529
 msgid "Field properties"
 msgstr "Feldeigenschaften"
 
-#: models.py:551
+#: models.py:555
 msgid "Fieldtype"
 msgstr "Feldtyp"
 
-#: models.py:552
+#: models.py:556
 msgid "Fieldtypes"
 msgstr "Feldtypen"
 
-#: models.py:572
-#: models.py:604
+#: models.py:576
+#: models.py:608
 #: views.py:136
 msgid "Group"
 msgstr "Gruppe"
 
-#: models.py:573
+#: models.py:577
 msgid "Groups"
 msgstr "Gruppen"
 
-#: models.py:610
+#: models.py:614
 msgid "Table group"
 msgstr "Tabellengruppe"
 
-#: models.py:611
+#: models.py:615
 msgid "Table groups"
 msgstr "Tabellengruppen"
 
-#: models.py:620
+#: models.py:624
 msgid "Unique"
 msgstr "Eindeutig"
 
-#: models.py:652
+#: models.py:656
 msgid "Field key"
 msgstr ""
 
-#: models.py:653
+#: models.py:657
 msgid "Field keys"
 msgstr ""
 
-#: models.py:710
+#: models.py:714
 msgid "Default field"
 msgstr "Standardfeld"
 
-#: models.py:711
+#: models.py:715
 msgid "Default fields"
 msgstr "Standardfelder"
 
-#: models.py:741
+#: models.py:745
 msgid "Is draft"
 msgstr "Entwurf"
 
-#: models.py:743
+#: models.py:747
 msgid "Text"
 msgstr "Text"
 
-#: models.py:748
+#: models.py:752
 msgid "Comment"
 msgstr "Kommentar"
 
-#: models.py:749
+#: models.py:753
 #: templates/field_heading.html:11
 #: templates/table.html:113
 #: templates/table_heading.html:10
 msgid "Comments"
 msgstr "Kommentare"
 
-#: models.py:761
+#: models.py:765
 #: templates/user.html:5
 #: templates/user.html.py:9
 msgid "User"
 msgstr ""
 
-#: models.py:766
+#: models.py:770
 msgid "Starred item"
 msgstr "Markiertes Objekt"
 
-#: models.py:767
+#: models.py:771
 msgid "Starred items"
 msgstr "Markierte Objekte"
 
@@ -539,7 +554,7 @@ msgid "Table / field"
 msgstr "Tabelle / Feld"
 
 #: templates/base.html:59
-#: templates/publish.html:47
+#: templates/publish.html:16
 msgid "Publish comment"
 msgstr "Kommentar veröffentlichen"
 
@@ -583,8 +598,8 @@ msgid "Home"
 msgstr ""
 
 #: templates/comment_row.html:17
-#: templates/publish.html:34
-#: templates/publish.html.py:38
+#: templates/field.html:42
+#: templates/field.html.py:46
 #: templates/table.html:42
 #: templates/table.html.py:46
 msgid "by"
@@ -600,6 +615,34 @@ msgstr "Aktuellste Kommentare"
 msgid "Starred objects"
 msgstr "Markierte Objekte"
 
+#: templates/field.html:37
+#: templates/field.html.py:59
+#: templates/field_row.html:29
+#: templates/project.html:31
+#: templates/project_row.html:11
+#: templates/starred_field_row.html:12
+#: templates/starred_table_row.html:11
+#: templates/table.html:37
+#: templates/table.html.py:67
+#: templates/table_row.html:15
+msgid "No description"
+msgstr "Keine Beschreibung"
+
+#: templates/field.html:41
+#: templates/table.html:41
+msgid "Created"
+msgstr "Erstellt"
+
+#: templates/field.html:45
+#: templates/table.html:45
+msgid "Updated"
+msgstr "Aktualisiert"
+
+#: templates/field.html:49
+#: templates/table.html:49
+msgid "Back"
+msgstr "Zurück"
+
 #: templates/field_heading.html:9
 msgid "References"
 msgstr "Referenziert"
@@ -611,28 +654,6 @@ msgstr "Referenziert"
 #: templates/table_heading.html:11
 msgid "Last change"
 msgstr "Letzte Änderung"
-
-#: templates/field_row.html:29
-#: templates/project.html:31
-#: templates/project_row.html:11
-#: templates/publish.html:29
-#: templates/starred_field_row.html:12
-#: templates/starred_table_row.html:11
-#: templates/table.html:37
-#: templates/table.html.py:67
-#: templates/table_row.html:15
-msgid "No description"
-msgstr "Keine Beschreibung"
-
-#: templates/field_row.html:49
-#: templates/table.html:141
-msgid "Draft"
-msgstr "Entwurf"
-
-#: templates/field_row.html:55
-#: templates/table.html:163
-msgid "ago"
-msgstr ""
 
 #: templates/footer.html:4
 msgid "Shortcuts"
@@ -666,7 +687,7 @@ msgstr "Keine Einträge gefunden"
 
 #: templates/latest_comments.html:27
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 #: templates/latest_comments.html:35
 msgid "Last 7 days"
@@ -674,7 +695,7 @@ msgstr "Letzten 7 Tage"
 
 #: templates/latest_comments.html:43
 msgid "Last 30 days"
-msgstr ""
+msgstr "Letzten 30 Tage"
 
 #: templates/project.html:9
 msgid "Language"
@@ -696,27 +717,12 @@ msgstr "Auswählen"
 msgid "Show"
 msgstr "Anzeigen"
 
-#: templates/publish.html:33
-#: templates/table.html:41
-msgid "Created"
-msgstr "Erstellt"
-
-#: templates/publish.html:37
-#: templates/table.html:45
-msgid "Updated"
-msgstr "Aktualisiert"
-
-#: templates/publish.html:41
-#: templates/table.html:49
-msgid "Back"
-msgstr "Zurück"
-
-#: templates/publish.html:56
+#: templates/publish.html:25
 #: templates/table.html:188
 msgid "Publish"
 msgstr "Veröffentlichen"
 
-#: templates/publish.html:57
+#: templates/publish.html:26
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -746,6 +752,14 @@ msgstr "Alle Kommentare aufklappen"
 msgid "Collapse all comments"
 msgstr "Alle Kommentare zuklappen"
 
+#: templates/table.html:141
+msgid "Draft"
+msgstr "Entwurf"
+
+#: templates/table.html:163
+msgid "ago"
+msgstr ""
+
 #: templates/table.html:183
 msgid "Reply"
 msgstr "Antworten"
@@ -767,9 +781,22 @@ msgstr ""
 msgid "new"
 msgstr "neu"
 
+#: templates/user.html:14
 #: templates/user_popup.html:5
 msgid "Member since"
 msgstr "Mitglied seit"
+
+#: templates/user.html:15
+msgid "Tables created"
+msgstr "Tabellen erstellt"
+
+#: templates/user.html:16
+msgid "Fields created"
+msgstr "Felder erstellt"
+
+#: templates/user.html:17
+msgid "Comments created"
+msgstr "Kommentare erstellt"
 
 #: templates/validation_error.html:4
 msgid "Error message(s)"
