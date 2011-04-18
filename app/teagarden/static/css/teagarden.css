@@ -539,7 +539,7 @@ padding-top:0.5em;
   border-left: 1px solid lightgray;
 }
 
-.default table .last {
+.default-list table .last {
   border-right: 1px solid lightgray;
 }
 
@@ -547,7 +547,7 @@ padding-top:0.5em;
   background-color: #EEEEEC;
   border-right: 1px solid lightgray;
   border-top: 1px solid lightgray;
-  padding-left: 8px;
+  padding-left: 3px;
   padding-right: 5px;
   padding-top: 2px;
   padding-bottom: 2px;
@@ -662,7 +662,7 @@ ul.timeline span.details {
 ul.timeline div.details {
   color: #5F5F5F;
   border-left: 0.3em solid #C8E3AC;
-  margin: 0.2em 0 0.2em 14.3em;
+  margin: 0.2em 0 0.2em 13.3em;
   padding: 0.5em;
 }
 

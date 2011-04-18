@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-18 12:21+0200\n"
+"POT-Creation-Date: 2011-04-18 14:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,7 +149,7 @@ msgid "Comment on '%s'"
 msgstr ""
 
 #: feeds.py:40
-msgid "Teagaden comments feed"
+msgid "Teagarden comments feed"
 msgstr ""
 
 #: filter.py:84 templates/project.html:44
@@ -196,7 +196,7 @@ msgstr ""
 
 #: models.py:271 models.py:300 models.py:394 models.py:418 models.py:538
 #: models.py:567 models.py:588 models.py:628 models.py:667
-#: templates/field_heading.html:6 templates/project_heading.html:4
+#: templates/field_heading.html:5 templates/project_heading.html:4
 #: templates/reference_heading.html:4 templates/starred_field_heading.html:7
 #: templates/starred_table_heading.html:6 templates/table_heading.html:5
 msgid "Name"
@@ -257,7 +257,7 @@ msgid "Tabletypes"
 msgstr ""
 
 #: models.py:420 models.py:514 models.py:650 models.py:669
-#: templates/field_heading.html:5
+#: templates/field_heading.html:6
 msgid "Position"
 msgstr ""
 
@@ -634,8 +634,8 @@ msgstr ""
 msgid "to reply to this comment"
 msgstr ""
 
-#: templates/table.html:221
-msgid "Send Message"
+#: templates/table.html:221 templates/registration/login.html:20
+msgid "Submit"
 msgstr ""
 
 #: templates/table_row.html:24
@@ -720,10 +720,6 @@ msgstr ""
 #: templates/registration_backup/login.html:16
 #: templates/registration_backup/login.html:27
 msgid "Login"
-msgstr ""
-
-#: templates/registration/login.html:20
-msgid "Submit"
 msgstr ""
 
 #: templates/registration/password_reset_complete.html:4

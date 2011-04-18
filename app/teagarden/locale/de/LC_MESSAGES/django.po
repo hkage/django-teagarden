@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-18 12:21+0200\n"
-"PO-Revision-Date: 2011-04-18 12:39+0100\n"
+"POT-Creation-Date: 2011-04-18 14:19+0200\n"
+"PO-Revision-Date: 2011-04-18 14:20+0100\n"
 "Last-Translator: Henning Kage <henning.kage@googlemail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -203,8 +203,8 @@ msgid "Comment on '%s'"
 msgstr "Kommentar zu '%s'"
 
 #: feeds.py:40
-msgid "Teagaden comments feed"
-msgstr "Teagardem Kommentar Feed"
+msgid "Teagarden comments feed"
+msgstr "Teagarden Kommentar Feed"
 
 #: filter.py:84
 #: templates/project.html:44
@@ -271,7 +271,7 @@ msgstr ""
 #: models.py:588
 #: models.py:628
 #: models.py:667
-#: templates/field_heading.html:6
+#: templates/field_heading.html:5
 #: templates/project_heading.html:4
 #: templates/reference_heading.html:4
 #: templates/starred_field_heading.html:7
@@ -351,7 +351,7 @@ msgstr "Tabellentypen"
 #: models.py:514
 #: models.py:650
 #: models.py:669
-#: templates/field_heading.html:5
+#: templates/field_heading.html:6
 msgid "Position"
 msgstr "Position"
 
@@ -774,8 +774,9 @@ msgid "to reply to this comment"
 msgstr ""
 
 #: templates/table.html:221
-msgid "Send Message"
-msgstr ""
+#: templates/registration/login.html:20
+msgid "Submit"
+msgstr "Abschicken"
 
 #: templates/table_row.html:24
 msgid "new"
@@ -861,10 +862,6 @@ msgstr "Erneut anmelden"
 #: templates/registration_backup/login.html:27
 msgid "Login"
 msgstr "Anmeldung"
-
-#: templates/registration/login.html:20
-msgid "Submit"
-msgstr "Abschicken"
 
 #: templates/registration/password_reset_complete.html:4
 #: templates/registration/password_reset_confirm.html:6
@@ -1004,6 +1001,9 @@ msgstr ""
 #: templates/registration_backup/login.html:28
 msgid "Forgot password?"
 msgstr ""
+
+#~ msgid "Send Message"
+#~ msgstr "Nachricht schicken"
 
 #~ msgid "Starred tables"
 #~ msgstr "Markierte Tabellen"

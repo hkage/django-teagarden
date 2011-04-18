@@ -218,13 +218,10 @@
             </div>
             <input type="hidden" name="subject" value="{{ issue.subject }}" />
             <input type="hidden" name="message_only" value="1" />
-            <input class="submit" type="submit" value="{% trans "Send Message" %}" />
+            <input class="submit" type="submit" value="{% trans "Submit" %}" />
             <input class="submit" type="button" value="{% trans "Discard" %}" name="discard" />
             </form>
             </div>
-            <a id="resizer" class="resizer" style="display:none;cursor:pointer">
-              <img class="zippy-plus" src="{{ STATIC_URL }}img/cleardot.gif">
-            </a>
             </div>
           {% endif %}
 
