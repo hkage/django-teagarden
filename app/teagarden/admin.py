@@ -33,21 +33,21 @@ class TabularInline(admin.TabularInline):
 ### Forms ###
 
 class ProjectForm(forms.ModelForm):
-    
+
     name = forms.CharField(max_length=80, required=True,
         widget=forms.TextInput(attrs={"size": 40}))
     short_description = forms.CharField(max_length=40, required=False,
         widget=forms.TextInput(attrs={"size": 40}))
     description = forms.CharField(max_length=2000, required=False,
         widget=forms.Textarea(attrs={"cols": 80, "rows": 10}))
-        
+
     class Meta:
         model = models.Project
-    
+
 
 class TableForm(forms.ModelForm):
-    
-    name = forms.CharField(max_length=30, required=True, 
+
+    name = forms.CharField(max_length=30, required=True,
         widget=forms.TextInput(attrs={"size": 30}))
     project = forms.ModelChoiceField(queryset=models.Project.objects.all())
     prefix = forms.CharField(max_length=3, required=False,
@@ -57,7 +57,7 @@ class TableForm(forms.ModelForm):
         widget=forms.TextInput(attrs={"size": 40}))
     description = forms.CharField(max_length=2000, required=False,
         widget=forms.Textarea(attrs={"cols": 80, "rows": 10}))
-    
+
 
     class Meta:
         model = models.Table
@@ -72,12 +72,14 @@ class TableForm(forms.ModelForm):
                                           " use for project '%(project)s'.")
                                         % {"table": name, "project": project})
         prefix = self.cleaned_data.get("prefix")
-        tables = models.Table.objects.filter(project=project, prefix=prefix)
-        tables = tables.exclude(id=self.instance.id)
-        if tables.count() > 0:
-            raise forms.ValidationError(_(u"The prefix '%(prefix)s' is already in use"
-                                          " for project '%(project)s'.")
-                                          % {"prefix": prefix, "project": project})
+        if prefix:
+            tables = models.Table.objects.filter(project=project, prefix=prefix)
+            tables = tables.exclude(id=self.instance.id)
+            if tables.count() > 0:
+                raise forms.ValidationError(
+                    _(u"The prefix '%(prefix)s' is already in use for project "
+                      " '%(project)s'.")
+                    % {"prefix": prefix, "project": project})
         return self.cleaned_data
 
 
@@ -136,8 +138,8 @@ class PrimaryKeyRawIdWidget(widgets.ForeignKeyRawIdWidget):
         #print self.rel.get_related_field()
         #params["table__project__id__exact"] =
         return params
-        
-        
+
+
 ### Model Admin classes ###
 
 
@@ -175,7 +177,7 @@ class TableAdmin(ModelAdmin):
             "fields": ("short_description", "description")}),
         (_(u"Database settings"), {
             "classes": ("collapse",),
-            "fields": ["first_extension", "next_extension", "lock_mode", 
+            "fields": ["first_extension", "next_extension", "lock_mode",
                        "storage_clause"]}),
         (_(u"Timestamp"), {
             "classes": ("collapse",),
@@ -265,7 +267,7 @@ class TableAdmin(ModelAdmin):
         if request.session.get("project", 0):
             form.base_fields["project"].initial = request.session["project"]
         return form
-        
+
     def save_formset(self, request, form, formset, change):
         instances = formset.save(commit=False)
         for instance in instances:
@@ -383,7 +385,7 @@ class FieldAdmin(ModelAdmin):
     get_table_name.allow_tags = True
     get_table_name.short_description = _(u"Fields")
     get_table_name.admin_order_field = "table"
-    
+
     def get_readonly_fields(self, request, obj=None):
         if isinstance(obj, models.Field):
             if obj.type.precision == False:
@@ -579,17 +581,17 @@ class DefaultFieldAdmin(ModelAdmin):
             project_id = request.session["project"]
             query = query.filter(project=int(project_id))
         return query
-        
-        
+
+
 class CommentAdmin(ModelAdmin):
-    
+
     list_display = ("content_type", "object_id", "content_object", "is_draft",
                     "text", "created", "created_by", "updated", "updated_by")
     list_display_links = ("content_type",)
-    
-    
+
+
 class StarredItemAdmin(ModelAdmin):
-    
+
     list_display = ("content_type", "object_id", "content_object", "user")
     list_display_links = ("content_type",)
 

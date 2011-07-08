@@ -344,12 +344,8 @@ def starred_objects(request):
 @login_required
 @decorators.table_required
 def table(request):
-    #fields = models.Field.objects.filter(table=request.table.id)
-    #fields = fields.order_by("position")
     fields = models.Field.objects.select_related()
-    #fields = fields.filter(Q(fieldcomment__field__table=request.table))
     fields = fields.filter(table=request.table.id).order_by("position")
-    # fields = fields.aggregate(Count())
     comments = []
     draft_count = 0
     for cmt in request.table.get_comments():
@@ -359,7 +355,6 @@ def table(request):
         if cmt.is_draft and cmt.created_by == request.user:
             draft_count += 1
     references = models.Table.objects.all()
-    # fields = related name
     references = references.filter(Q(fields__foreign__table=request.table.id))
     references = references.distinct()
     references = references.order_by("name")
@@ -426,5 +421,16 @@ def unstar_field(request):
 @decorators.field_required
 def field(request):
     """Displays the details and comments of a field."""
-    return respond(request, 'field.html', {'field': request.field})
+    comments = []
+    draft_count = 0
+    for cmt in request.field.get_comments():
+        if (not cmt.is_draft
+            or (cmt.is_draft and cmt.created_by == request.user)):
+            comments.append(cmt)
+        if cmt.is_draft and cmt.created_by == request.user:
+            draft_count += 1
+    return respond(request, 'field.html', {
+        'field': request.field, 'comments': comments,
+        'comment_count': len(comments) - draft_count,
+        "draft_count": draft_count,})
 

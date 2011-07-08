@@ -7,7 +7,7 @@
   <td>
     <table>
     {% for field in ref.foreign_keys %}
-      <tr><td>{{ field.full_name }}</td></tr>
+      <tr><td><a href="{% url teagarden.views.field field.id %}">{{ field.full_name }}</a></td></tr>
     {% endfor %}
     </table>
   </td>
