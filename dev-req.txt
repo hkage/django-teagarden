@@ -1,7 +1,0 @@
-# Modules used for development.
-ipython>=0.10.1
-django-debug-toolbar==0.8.4
-django-extensions==0.6
-South # for developent schema migration
-sphinx>=1.0 # to generate the documentation
-pygraphviz # to generate model graphs

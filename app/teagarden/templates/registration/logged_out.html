@@ -1,7 +1,0 @@
-{% extends "base_minimal.html" %}
-{% load i18n %}
-{% block content %}
-  {% trans "You have been successfully logged out." %}
-  <br/><br/>
-  <a href="{% url  django.contrib.auth.views.login %}">{% trans "Login again" %}</a>
-{% endblock %}

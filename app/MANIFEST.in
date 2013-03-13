@@ -1,5 +1,0 @@
-include manage.py
-include settings.py.sample
-recursive-include teagarden *.py *.html *.css *.js *.json *.png *.po
-prune teagarden/static/img/sprites/
-prune teagarden/static/closure
