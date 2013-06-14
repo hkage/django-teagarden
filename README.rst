@@ -25,20 +25,15 @@ Teagarden is written in Python (django) and licensed under the `GNU General Publ
 Features
 --------
 
-Currently django-teagarden cannot create any sources from the metadata. This
-feature will be implemented as soon as possible.
+Currently I am rebooting this project. Therefore the current feature list is not
+freezed.
 
-Current features
+Planned features
 ================
-
  * Backend for creating and managing projects, tables, fields etc.
  * Frontend to view projects, tables and fields
  * Composing table comments
  * RSS comment feed
-
-Planned features
-================
-
  * Preview and create source files for tables in many dialects (e.g. PostgreSQL,
    Oracle, Python)
  * Visualization of tables and their references
