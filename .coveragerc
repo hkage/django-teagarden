@@ -1,0 +1,15 @@
+[run]
+source =
+    teagarden
+[report]
+omit =
+    */tests/*
+    */tests.py
+    */migrations/*
+    */settings*.py
+    teagarden/settings/*
+    teagarden/urls.py
+    teagarden/wsgi.py
+exclude_lines =
+    if self.debug:
+    raise NotImplementedError
