@@ -83,8 +83,8 @@ class Table(models.Model):
                                    verbose_name=_(u'Description'))
     project = models.ForeignKey('Project', null=False,
                                 blank=False, verbose_name=_(u'Project'))
-    group = models.ManyToManyRelation(verbose_name=_(u'Group'),
-                                      related_name='tables')
+    group = models.ManyToManyField('Group', verbose_name=_(u'Group'),
+                                    related_name='tables')
 
     class Meta:
         ordering = ('name',)
@@ -98,20 +98,18 @@ class Table(models.Model):
 
 class FieldProperty(models.Model):
 
-    position = models.IntegerField(db_column='pos', null=False,
+    position = models.IntegerField(null=False,
                                    verbose_name=_(u'Position'))
-    property = models.ForeignKey('Property', db_column='etid', null=False,
+    property = models.ForeignKey('Property', null=False,
                                  blank=False,
                                  verbose_name=_(u'Property'))
-    field = models.ForeignKey('Field', db_column='feid', null=False,
+    field = models.ForeignKey('Field', null=False,
                               blank=False,
                               verbose_name=_(u'Field'))
-    value = models.CharField(max_length=256, db_column='wert',
+    value = models.CharField(max_length=256,
                              verbose_name=_(u'Value'))
 
     class Meta:
-        db_table = u'feldeigenschaft'
-        db_column_prefix = u'fei_'
         unique_together = ('property', 'field')
         verbose_name = _(u'Field property')
         verbose_name_plural = _(u'Field properties')
@@ -165,14 +163,14 @@ class Field(models.Model):
     primary = models.IntegerField(null=False, blank=False,
                                   choices=BOOLEAN_CHOICES,
                                   verbose_name=_(u'Primary'))
-    foreign = models.ForeignKey('self', db_column='fremd_feid',
+    foreign = models.ForeignKey('self',
                                 null=True, blank=True,
                                 on_delete=models.SET_NULL,
                                 verbose_name=_(u'Foreign key'))
     lookup = models.CharField(max_length=2,
                               null=True, blank=True, choices=LOOKUP_CHOICES,
                               verbose_name=_(u'Lookup?'))
-    nullable = models.IntegerField(db_column='null', null=False,
+    nullable = models.IntegerField(null=False,
                                    blank=False, choices=BOOLEAN_CHOICES,
                                    verbose_name=_(u'Nullable'))
     mask_length = models.IntegerField(null=False,
@@ -212,7 +210,7 @@ class Property(models.Model):
         return self.name
 
 
-class Key(TimestampModel):
+class Key(models.Model):
 
     unique = models.IntegerField(default=False,
                                  choices=BOOLEAN_CHOICES,
@@ -233,11 +231,11 @@ class Key(TimestampModel):
 
 class FieldKey(models.Model):
 
-    field = models.ForeignKey('Field', db_column='feid', null=False,
+    field = models.ForeignKey('Field', null=False,
                               blank=False, verbose_name=_(u'Field'))
-    key = models.ForeignKey('Key', db_column='scid', null=False,
+    key = models.ForeignKey('Key', null=False,
                             blank=False, verbose_name=_(u'Key'))
-    position = models.IntegerField(db_column='pos', null=False, blank=False,
+    position = models.IntegerField(null=False, blank=False,
                                    verbose_name=_(u'Position'))
 
     class Meta:
