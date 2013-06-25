@@ -167,3 +167,6 @@ SUIT_CONFIG = {
     'ADMIN_NAME': 'django-teagarden',
     'SHOW_REQUIRED_ASTERISK': True
 }
+
+# django-teagarden settings
+FIELD_POSITION_GAP = 10

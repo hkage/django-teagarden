@@ -41,6 +41,12 @@ Planned features
  * Visualization of tables and their references
  * Metadata / database comparison to create alter table statements
 
+Settings
+========
+
+``FIELD_POSITION_GAP`` (default: 10)
+  Position gap between table fields.
+
 .. |buildstatus| image:: https://travis-ci.org/hkage/django-teagarden.png?branch=master
 .. _buildstatus: http://travis-ci.org/hkage/django-teagarden
 .. |coverage| image:: https://coveralls.io/repos/hkage/django-teagarden/badge.png?branch=master
