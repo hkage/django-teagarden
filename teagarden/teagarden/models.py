@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""Model definitions"""
+
+import warnings
+
 from django.db import models
 from django.utils.translation import ugettext as _
 
@@ -15,6 +19,57 @@ LOOKUP_CHOICES = (
 )
 
 
+def add_default_fields(klass):
+    """Adds create/update user and timestamp fields to classes.
+
+     This class decorator can only be used with subclasses of
+     django.db.Model.
+
+     Example::
+
+       @add_default_fields
+       class Book(models.Model):
+           title = models.CharField(max_length=200)
+           author = models.CharField(max_length=200)
+
+     Given the example class above the resulting model will have the
+     fields "title", "author", "crdate", "cruser", "upddate", "upduser"
+     (in that order). The additional fields will only be added if not
+     already defined in the model itself.
+
+     See also :class:`UpdateDefaultFieldsMiddleware` in this module on
+     how to automatically populate this fields.
+     """
+    if not issubclass(klass, models.Model):
+        warnings.warn(
+            'add_default_fields not used with subclass of Model'
+            ' (got %r instead)' % klass, Warning)
+        return klass
+    field_names = [f.name for f in klass._meta.fields]
+    if 'created' not in field_names:
+        klass.add_to_class('created', models.DateTimeField(
+            auto_now_add=True, verbose_name=_(u'Created at'),
+            blank=True, null=True,
+            editable=False))
+    if 'created_by' not in field_names:
+        klass.add_to_class('created_by', models.CharField(
+            max_length=100, verbose_name=_(u'Created by'),
+            blank=True, null=True,
+            editable=False))
+    if 'modified' not in field_names:
+        klass.add_to_class('modified', models.DateTimeField(
+            auto_now=True, verbose_name=_(u'Mofified at'),
+            blank=True, null=True,
+            editable=False))
+    if 'modified_by' not in field_names:
+        klass.add_to_class('modified_by', models.CharField(
+            max_length=100, verbose_name=_(u'Modified by'),
+            blank=True, null=True,
+            editable=False))
+    return klass
+
+
+@add_default_fields
 class Project(models.Model):
 
     name = models.CharField(max_length=250, null=False, blank=False,
@@ -32,6 +87,7 @@ class Project(models.Model):
         verbose_name_plural = _(u'Projects')
 
 
+@add_default_fields
 class Group(models.Model):
 
     name = models.CharField(max_length=250, blank=False,
@@ -49,6 +105,7 @@ class Group(models.Model):
         return self.name
 
 
+@add_default_fields
 class TableType(models.Model):
 
     name = models.CharField(max_length=15, null=False,
@@ -66,7 +123,7 @@ class TableType(models.Model):
     def __unicode__(self):
         return self.name
 
-
+@add_default_fields
 class Table(models.Model):
 
     name = models.CharField(max_length=30, null=False,
@@ -96,6 +153,7 @@ class Table(models.Model):
         return self.name
 
 
+@add_default_fields
 class FieldProperty(models.Model):
 
     position = models.IntegerField(null=False,
@@ -115,6 +173,7 @@ class FieldProperty(models.Model):
         verbose_name_plural = _(u'Field properties')
 
 
+@add_default_fields
 class FieldType(models.Model):
 
     name = models.CharField(max_length=15, null=False,
@@ -138,6 +197,7 @@ class FieldType(models.Model):
         verbose_name_plural = _(u'Fieldtypes')
 
 
+@add_default_fields
 class Field(models.Model):
 
     name = models.CharField(max_length=60, null=False,
@@ -196,6 +256,7 @@ class Field(models.Model):
         return self.name
 
 
+@add_default_fields
 class Property(models.Model):
 
     name = models.CharField(max_length=60, blank=False,
@@ -210,6 +271,7 @@ class Property(models.Model):
         return self.name
 
 
+@add_default_fields
 class Key(models.Model):
 
     unique = models.IntegerField(default=False,
@@ -229,6 +291,7 @@ class Key(models.Model):
         return self.name
 
 
+@add_default_fields
 class FieldKey(models.Model):
 
     field = models.ForeignKey('Field', null=False,
@@ -242,4 +305,3 @@ class FieldKey(models.Model):
         unique_together = ('field', 'key')
         verbose_name = _(u'Field key')
         verbose_name_plural = _(u'Field keys')
-
