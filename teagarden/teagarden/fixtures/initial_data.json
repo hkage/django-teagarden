@@ -1,0 +1,240 @@
+[
+{
+  "pk": 1,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Character",
+    "short_name": "Cha",
+    "created": "2013-06-25T20:01:29.269Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:01:29.269Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 2,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Smallint",
+    "short_name": "SMA",
+    "created": "2013-06-25T20:01:39.848Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:01:39.848Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 3,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Integer",
+    "short_name": "Int",
+    "created": "2013-06-25T20:01:47.114Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:01:47.114Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 4,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Float",
+    "short_name": "Flo",
+    "created": "2013-06-25T20:01:55.944Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:01:55.944Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 5,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Smallfloat",
+    "short_name": "SFL",
+    "created": "2013-06-25T20:02:11.749Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:02:11.749Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 6,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Decimal",
+    "short_name": "Dec",
+    "created": "2013-06-25T20:02:20.812Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:02:20.812Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 7,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Serial",
+    "short_name": "Ser",
+    "created": "2013-06-25T20:02:27.647Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:02:27.647Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 8,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Date",
+    "short_name": "Dat",
+    "created": "2013-06-25T20:02:32.599Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:02:32.599Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 9,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Money",
+    "short_name": "Mon",
+    "created": "2013-06-25T20:02:42.652Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:02:42.652Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 10,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Serial8",
+    "short_name": "Se8",
+    "created": "2013-06-25T20:02:53.033Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:02:53.033Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 11,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Datetime",
+    "short_name": "Dti",
+    "created": "2013-06-25T20:03:06.474Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:03:06.474Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 12,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Bytes",
+    "short_name": "Byt",
+    "created": "2013-06-25T20:03:12.910Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:03:12.910Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 13,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Text",
+    "short_name": "Txt",
+    "created": "2013-06-25T20:03:19.515Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:03:19.515Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 14,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Varchar",
+    "short_name": "Var",
+    "created": "2013-06-25T20:03:29.082Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:03:29.082Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 15,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Interval",
+    "short_name": "Itv",
+    "created": "2013-06-25T20:03:40.503Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:03:40.503Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 16,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Integer8",
+    "short_name": "In8",
+    "created": "2013-06-25T20:03:47.475Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:03:47.475Z",
+    "scaling": 0
+  }
+},
+{
+  "pk": 17,
+  "model": "teagarden.fieldtype",
+  "fields": {
+    "modified_by": null,
+    "name": "Boolean",
+    "short_name": "Bol",
+    "created": "2013-06-25T20:03:54.328Z",
+    "precision": 0,
+    "created_by": null,
+    "modified": "2013-06-25T20:03:54.328Z",
+    "scaling": 0
+  }
+}
+]

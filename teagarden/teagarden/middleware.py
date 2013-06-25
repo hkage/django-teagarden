@@ -16,13 +16,13 @@ class UpdateDefaultFieldsMiddleware(object):
         def update_default_fields(*args, **kwds):
             instance = kwds['instance']
             if hasattr(instance, 'created_by') and not instance.pk:
-                instance.cruser = user_id
+                instance.created_by = user_id
             if hasattr(instance, 'modified_by'):
-                instance.upduser = user_id
+                instance.modified_by = user_id
         # store dispatch_uid as request attribute
-        request._auto_current_user_uid = id(update_pux_default_fields)
+        request._auto_current_user_uid = id(update_default_fields)
         # connect callback to pre_save signal
-        pre_save.connect(update_pux_default_fields, weak=False,
+        pre_save.connect(update_default_fields, weak=False,
                          dispatch_uid=request._auto_current_user_uid)
 
     def _disconnect_callback(self, request):

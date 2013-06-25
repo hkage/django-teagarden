@@ -86,6 +86,9 @@ class Project(models.Model):
         verbose_name = _(u'Project')
         verbose_name_plural = _(u'Projects')
 
+    def __unicode__(self):
+        return self.name
+
 
 @add_default_fields
 class Group(models.Model):
@@ -141,7 +144,8 @@ class Table(models.Model):
     project = models.ForeignKey('Project', null=False,
                                 blank=False, verbose_name=_(u'Project'))
     group = models.ManyToManyField('Group', verbose_name=_(u'Group'),
-                                    related_name='tables')
+                                   blank=True, null=True,
+                                   related_name='tables')
 
     class Meta:
         ordering = ('name',)
@@ -195,6 +199,9 @@ class FieldType(models.Model):
         ordering = ('name',)
         verbose_name = _(u'Fieldtype')
         verbose_name_plural = _(u'Fieldtypes')
+
+    def __unicode__(self):
+        return self.name
 
 
 @add_default_fields

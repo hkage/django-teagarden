@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'suit',
     'django.contrib.admin',
     # 3rd party
     'south',
@@ -160,4 +161,9 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'django-teagarden',
+    'SHOW_REQUIRED_ASTERISK': True
 }
