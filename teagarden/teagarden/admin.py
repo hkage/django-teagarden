@@ -5,6 +5,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib import admin, messages
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 
 import reversion
@@ -48,6 +49,66 @@ class TableForm(forms.ModelForm):
                       u' project \'%(project)s\'.')
                     % {'prefix': prefix, 'project': project})
         return self.cleaned_data
+
+
+class FieldAdmin(reversion.VersionAdmin):
+
+    fieldsets = [
+        (None, {
+            'fields': ('name',
+                       'table',
+                       'position')}),
+        (_(u'Datatype'), {
+            'fields': ('type',
+                       'precision',
+                       'scaling',
+                       'default_value')}),
+        (_(u'Constraints'), {
+            'fields': ('primary',
+                       'nullable',
+                       'foreign')}),
+        (_(u'Description'), {
+            'fields': ('short_description',
+                       'description')}),
+        (_(u'Frontend'), {
+            'fields': ('label',
+                       'mask_length')}),
+        (_(u'Database settings'), {
+            'fields': ('cascading_delete',
+                       'lookup')}),
+    ]
+    list_display = ('name', 'type', 'position', 'primary',
+                    'nullable', 'foreign_table', 'project', 'get_table_name',
+                    'created', 'created_by', 'modified', 'modified_by')
+    list_filter = ['table__project', 'table', 'primary']
+    search_fields = ('name',)
+
+    def foreign_table(self, obj):
+        if obj.foreign:
+            return obj.foreign.table
+        else:
+            return ''
+    foreign_table.short_description = _(u'Foreign table')
+
+    def get_table_name(self, obj):
+        name = obj.table.name
+        url = reverse('admin:teagarden_table_changelist')
+        url += '%d' % obj.table.id
+        return '<a href=\'%s\'>%s</a>' % (url, name)
+    get_table_name.allow_tags = True
+    get_table_name.short_description = _(u'Fields')
+    get_table_name.admin_order_field = 'table'
+
+    def project(self, obj):
+        return obj.table.project
+    project.short_description = _(u'Project')
+
+    def save_model(self, request, obj, form, change):
+        # Automatically determine the fields new position
+        if not obj.position:
+            obj.set_next_position()
+        super(FieldAdmin, self).save_model(request, obj, form, change)
+        #obj.save()
 
 
 class FieldTypeAdmin(reversion.VersionAdmin):
@@ -116,6 +177,7 @@ class TableTypeAdmin(reversion.VersionAdmin):
     list_display = ()
 
 
+admin.site.register(models.Field, FieldAdmin)
 admin.site.register(models.FieldType, FieldTypeAdmin)
 admin.site.register(models.Group, GroupAdmin)
 admin.site.register(models.Project, ProjectAdmin)

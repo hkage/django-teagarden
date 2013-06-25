@@ -4,6 +4,7 @@
 
 import warnings
 
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext as _
 
@@ -156,6 +157,13 @@ class Table(models.Model):
     def __unicode__(self):
         return self.name
 
+    @property
+    def foreign_keys(self):
+        fields = Field.objects.filter(table=self.id)
+        fields = fields.filter(foreign__isnull=False)
+        fields = fields.order_by('position')
+        return fields
+
 
 @add_default_fields
 class FieldProperty(models.Model):
@@ -261,6 +269,35 @@ class Field(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def full_name(self):
+        """Return a qualified name by table and prefix, if given.
+
+        :returns: Name as string
+        """
+        if self.table.prefix:
+            return '%s_%s' % (self.table.prefix, self.name)
+        else:
+            return self.name
+
+    def full_type(self):
+        retval = '%s' % self.type
+        if self.precision and self.scaling:
+            retval += ' (%s, %s)' % (self.precision, self.scaling)
+        elif self.precision and not self.scaling:
+            retval += ' (%s)' % self.precision
+        return retval
+
+    def set_next_position(self, table=None):
+        """Set the next available position for this field.
+
+        :param table: A :class:`Table` instance
+        """
+        if not table:
+            table = self.table
+        fields = Field.objects.filter(table=table)
+        max = fields.aggregate(models.Max('position'))['position__max'] or 0
+        self.position = max + settings.FIELD_POSITION_GAP
 
 
 @add_default_fields
