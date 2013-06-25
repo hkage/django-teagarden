@@ -2,6 +2,9 @@
 Teagarden
 =========
 
+|buildstatus|_
+|coverage|_
+
 Teagarden is a django based webapplication used for database planning and
 modelling during the software development process. With Teagarden software
 developers and database architects can create database tables, fields,
@@ -38,5 +41,9 @@ Planned features
  * Visualization of tables and their references
  * Metadata / database comparison to create alter table statements
 
+.. |buildstatus| image:: https://travis-ci.org/hkage/django-teagarden.png?branch=master
+.. _buildstatus: http://travis-ci.org/hkage/django-teagarden
+.. |coverage| image:: https://coveralls.io/repos/hkage/django-teagarden/badge.png?branch=master
+.. _coverage: https://coveralls.io/repos/hkage/django-teagarden
 __ http://de.wikipedia.org/wiki/Jack_Teagarden
 __ http://www.gnu.org/licenses/gpl.html
