@@ -1,6 +1,8 @@
-=========
-Teagarden
-=========
+================
+django-teagarden
+================
+
+Database modelling and planning software.
 
 |buildstatus|_
 |coverage|_
