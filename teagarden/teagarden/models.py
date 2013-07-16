@@ -127,6 +127,7 @@ class TableType(models.Model):
     def __unicode__(self):
         return self.name
 
+
 @add_default_fields
 class Table(models.Model):
 

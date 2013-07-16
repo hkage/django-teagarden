@@ -332,7 +332,7 @@ class Migration(SchemaMigration):
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'null': 'True', 'blank': 'True'}),
             'created_by': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '2000', 'null': 'True', 'blank': 'True'}),
-            'group': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'tables'", 'symmetrical': 'False', 'to': u"orm['teagarden.Group']"}),
+            'group': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'tables'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['teagarden.Group']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'null': 'True', 'blank': 'True'}),
             'modified_by': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
