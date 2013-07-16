@@ -5,11 +5,11 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+
+from teagarden import views
+
+
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'teagarden.views.home', name='home'),
-    # url(r'^teagarden/', include('teagarden.foo.urls')),
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', views.IndexView.as_view(), name='base_index'),
 )
