@@ -1,0 +1,3 @@
+[submodule "teagarden/teagarden/static/bootstrap"]
+	path = teagarden/teagarden/static/bootstrap
+	url = git://github.com/twitter/bootstrap.git
