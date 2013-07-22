@@ -8,6 +8,8 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext as _
 
+from django_utils.models import add_default_fields
+
 
 BOOLEAN_CHOICES = (
     (0, _(u'False')),
@@ -18,56 +20,6 @@ LOOKUP_CHOICES = (
     (u'L', _(u'Lookup')),
     (u'D', _(u'Detail'))
 )
-
-
-def add_default_fields(klass):
-    """Adds create/update user and timestamp fields to classes.
-
-     This class decorator can only be used with subclasses of
-     django.db.Model.
-
-     Example::
-
-       @add_default_fields
-       class Book(models.Model):
-           title = models.CharField(max_length=200)
-           author = models.CharField(max_length=200)
-
-     Given the example class above the resulting model will have the
-     fields "title", "author", "crdate", "cruser", "upddate", "upduser"
-     (in that order). The additional fields will only be added if not
-     already defined in the model itself.
-
-     See also :class:`UpdateDefaultFieldsMiddleware` in this module on
-     how to automatically populate this fields.
-     """
-    if not issubclass(klass, models.Model):
-        warnings.warn(
-            'add_default_fields not used with subclass of Model'
-            ' (got %r instead)' % klass, Warning)
-        return klass
-    field_names = [f.name for f in klass._meta.fields]
-    if 'created' not in field_names:
-        klass.add_to_class('created', models.DateTimeField(
-            auto_now_add=True, verbose_name=_(u'Created at'),
-            blank=True, null=True,
-            editable=False))
-    if 'created_by' not in field_names:
-        klass.add_to_class('created_by', models.CharField(
-            max_length=100, verbose_name=_(u'Created by'),
-            blank=True, null=True,
-            editable=False))
-    if 'modified' not in field_names:
-        klass.add_to_class('modified', models.DateTimeField(
-            auto_now=True, verbose_name=_(u'Mofified at'),
-            blank=True, null=True,
-            editable=False))
-    if 'modified_by' not in field_names:
-        klass.add_to_class('modified_by', models.CharField(
-            max_length=100, verbose_name=_(u'Modified by'),
-            blank=True, null=True,
-            editable=False))
-    return klass
 
 
 @add_default_fields
