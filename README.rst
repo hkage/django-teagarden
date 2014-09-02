@@ -1,18 +1,19 @@
-================
-django-teagarden
-================
+=========
+Teagarden
+=========
 
 Database modelling and planning software.
 
 |buildstatus|_
 |coverage|_
 
-Teagarden is a django based webapplication used for database planning and
+Teagarden is a webapplication used for database planning and
 modelling during the software development process. With Teagarden software
 developers and database architects can create database tables, fields,
 constraints and relations without specifying the database system they want to
 use for their project. Teagarden aims to be a database development platform and
-documenation tool, but can also create the final SQL statements and compares the specific, productive database against the modelling metadata schema.
+documenation tool, but can also create the final SQL statements and compares the 
+specific, productive database against the modelling metadata schema.
 
 ----------------
 Why "teagarden"?
