@@ -50,7 +50,7 @@ Settings
 ``FIELD_POSITION_GAP`` (default: 10)
   Position gap between table fields.
 
-.. |buildstatus| image:: https://travis-ci.org/hkage/django-teagarden.png?branch=master
+.. |buildstatus| image:: https://travis-ci.org/hkage/teagarden.svg?branch=master
 .. _buildstatus: http://travis-ci.org/hkage/django-teagarden
 .. |coverage| image:: https://coveralls.io/repos/hkage/django-teagarden/badge.png?branch=master
 .. _coverage: https://coveralls.io/repos/hkage/django-teagarden
