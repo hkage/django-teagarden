@@ -1,4 +1,0 @@
-# requirements/test.txt
--r common.txt
-
-coveralls==0.2
